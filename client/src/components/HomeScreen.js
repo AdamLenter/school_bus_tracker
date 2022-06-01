@@ -1,8 +1,10 @@
 import logo from '../bus_image.jpeg';
 import '../App.css';
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
-function HomeScreen() {
+
+function HomeScreen({updateFormData}) {
   const blankLoginFormData = {
     username: "", 
     password: ""
@@ -11,12 +13,6 @@ function HomeScreen() {
 
   function updateLoginFormData(event) {
     setLoginFormData(updateFormData(loginFormData, event));
-  }
-
-  function updateFormData(formData, event) {
-    let updatedFormData = {...formData};
-    updatedFormData[event.target.name] = event.target.value;
-    return updatedFormData;
   }
 
   return (
@@ -35,7 +31,7 @@ function HomeScreen() {
         <br />
         <button>Submit</button>
       </form>
-      <p>Click here to create a new account</p>
+      <p>Click <Link to="/register">here</Link> to create a new account</p>
     </div>
   );
 }
