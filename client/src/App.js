@@ -9,6 +9,16 @@ function App() {
   }
   const [loginFormData, setLoginFormData] = useState(blankLoginFormData);
 
+  function updateLoginFormData(event) {
+    setLoginFormData(updateFormData(loginFormData, event));
+  }
+
+  function updateFormData(formData, event) {
+    let updatedFormData = {...formData};
+    updatedFormData[event.target.name] = event.target.value;
+    return updatedFormData;
+  }
+
   return (
     <div className="App">
       <h1>School Bus Tracker</h1>
@@ -16,11 +26,11 @@ function App() {
       <h2>Returning User?</h2>
       <form>
         <label>Username: </label>
-        <input value = {setLoginFormData.username} />
+        <input name = "username" value = {setLoginFormData.username} onChange = {updateLoginFormData} />
         <br />
         <br />
         <label>Password: </label>
-        <input type = "password" value = {setLoginFormData.password} />
+        <input name = "password" type = "password" value = {setLoginFormData.password} onChange = {updateLoginFormData} />
         <br />
         <br />
         <button>Submit</button>
