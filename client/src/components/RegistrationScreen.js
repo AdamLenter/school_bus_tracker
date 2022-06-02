@@ -1,5 +1,6 @@
 import '../App.css';
 import React, { useState } from 'react';
+import DisplayErrors from './DisplayErrors';
 
 function RegistrationScreen({ updateFormData }) {
 
@@ -8,9 +9,11 @@ function RegistrationScreen({ updateFormData }) {
         last_name: "", 
         user_type: "Parent", 
         username: "", 
-        password_digest: "",
-        confirm_password: ""
+        password: "",
+        password_confirmation: ""
     }) 
+
+    const [registrationErrors, setRegistrationErrors] = useState([]);
 
     function updateRegistrationFormData(event) {
         const updatedFormData = updateFormData(registrationFormData, event);
@@ -19,12 +22,27 @@ function RegistrationScreen({ updateFormData }) {
 
     function handleSubmit(event) {
         event.preventDefault();
-        console.log(registrationFormData);
+       
+        fetch("/users", {
+            method: "POST", 
+            headers: {"Content-Type": "application/json"}, 
+            body: JSON.stringify(registrationFormData)
+        })
+        .then((response) => {
+            if (response.ok) {
+              response.json().then(() => console.log("Created"));
+            } else {
+              response.json().then((errorData) => setRegistrationErrors(errorData.errors));
+            }
+        })
     }
+console.log(registrationErrors);
+
 
     return (
         <div>
         <h1>Create Account</h1>
+        {registrationErrors.length > 0 ? <DisplayErrors errors = {registrationErrors} /> : null}
         <form onSubmit={handleSubmit}>
             <label>I am a: </label>
             <select name = "user_type" value = {registrationFormData.user_type} onChange = {updateRegistrationFormData}>
@@ -50,12 +68,12 @@ function RegistrationScreen({ updateFormData }) {
             <br />
             
             <label>Password: </label>
-            <input type = "password" name = "password_digest" value = {registrationFormData.password_digest}  onChange = {updateRegistrationFormData} />
+            <input type = "password" name = "password" value = {registrationFormData.password}  onChange = {updateRegistrationFormData} />
             <br />
             <br />
 
             <label>Confirm password: </label>
-            <input type = "password" name = "confirm_password" value = {registrationFormData.confirm_password}  onChange = {updateRegistrationFormData} />
+            <input type = "password" name = "password_confirmation" value = {registrationFormData.password_confirmation}  onChange = {updateRegistrationFormData} />
             <br />
             <br />
 

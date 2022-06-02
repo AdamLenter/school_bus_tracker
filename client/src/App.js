@@ -19,16 +19,6 @@ function App() {
       .then((r)=>r.json())
       .then((busList) => setBuses(busList))
       }, [])
-
-  console.log(buses);
-  // function createNewUser(userInfo) {
-  //   fetch("/users", {
-  //     method: "POST", 
-  //     headers: {"Content-Type": "application/json"}, 
-  //     body: JSON.stringify(userInfo)
-  //   })
-  //   .then((r)=>console.log(r));
-  // }
   
   return (
     <div className="App">
