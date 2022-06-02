@@ -15,7 +15,7 @@ function App() {
     <div className="App">
       <BrowserRouter>
         <Route exact path = "/register">
-          <RegistrationScreen />
+          <RegistrationScreen updateFormData={updateFormData} />
         </Route>
         <Route exact path = "/">
           
