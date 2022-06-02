@@ -1,0 +1,2 @@
+class ParentAndStudent < ApplicationRecord
+end

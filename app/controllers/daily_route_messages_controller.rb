@@ -1,0 +1,2 @@
+class DailyRouteMessagesController < ApplicationController
+end

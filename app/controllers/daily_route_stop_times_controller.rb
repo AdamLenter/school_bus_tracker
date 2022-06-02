@@ -1,0 +1,2 @@
+class DailyRouteStopTimesController < ApplicationController
+end

@@ -1,0 +1,2 @@
+class DailyRouteStopTime < ApplicationRecord
+end

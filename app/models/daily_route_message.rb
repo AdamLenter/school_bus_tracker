@@ -1,0 +1,2 @@
+class DailyRouteMessage < ApplicationRecord
+end

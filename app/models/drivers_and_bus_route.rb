@@ -1,0 +1,2 @@
+class DriversAndBusRoute < ApplicationRecord
+end
