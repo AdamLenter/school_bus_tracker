@@ -13,5 +13,5 @@ Rails.application.routes.draw do
 
   get 'buses', to: 'buses#index'
 
-  post 'users', to: 'users#create'
+  post 'users', to: 'special#create'
 end

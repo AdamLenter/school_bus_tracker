@@ -1,6 +1,7 @@
 import '../App.css';
 import React, { useState } from 'react';
 import DisplayErrors from './DisplayErrors';
+import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 
 function RegistrationScreen({ updateFormData }) {
 
@@ -13,6 +14,7 @@ function RegistrationScreen({ updateFormData }) {
         password_confirmation: ""
     }) 
 
+    const [userCreated, setUserCreated] = useState(false);
     const [registrationErrors, setRegistrationErrors] = useState([]);
 
     function updateRegistrationFormData(event) {
@@ -30,59 +32,67 @@ function RegistrationScreen({ updateFormData }) {
         })
         .then((response) => {
             if (response.ok) {
-              response.json().then(() => console.log("Created"));
+              setUserCreated(true);
             } else {
               response.json().then((errorData) => setRegistrationErrors(errorData.errors));
             }
         })
     }
-console.log(registrationErrors);
+console.log(userCreated)
+    if(!userCreated) {
+        return (
+            <div>
+            <h1>Create Account</h1>
+            {registrationErrors.length > 0 ? <DisplayErrors errors = {registrationErrors} /> : null}
+            <form onSubmit={handleSubmit}>
+                <label>I am a: </label>
+                <select name = "user_type" value = {registrationFormData.user_type} onChange = {updateRegistrationFormData}>
+                    <option value = "Parent">Parent</option>
+                    <option value = "Driver">Driver</option>
+                </select>
+                <br />
+                <br />
 
+                <label>First name: </label>
+                <input name = "first_name" value = {registrationFormData.first_name} onChange = {updateRegistrationFormData} />
+                <br />
+                <br />
 
-    return (
-        <div>
-        <h1>Create Account</h1>
-        {registrationErrors.length > 0 ? <DisplayErrors errors = {registrationErrors} /> : null}
-        <form onSubmit={handleSubmit}>
-            <label>I am a: </label>
-            <select name = "user_type" value = {registrationFormData.user_type} onChange = {updateRegistrationFormData}>
-                <option value = "Parent">Parent</option>
-                <option value = "Driver">Driver</option>
-            </select>
-            <br />
-            <br />
+                <label>Last name: </label>
+                <input name = "last_name" value = {registrationFormData.last_name}  onChange = {updateRegistrationFormData} />
+                <br />
+                <br />
 
-            <label>First name: </label>
-            <input name = "first_name" value = {registrationFormData.first_name} onChange = {updateRegistrationFormData} />
-            <br />
-            <br />
+                <label>Username: </label>
+                <input name = "username" value = {registrationFormData.username}  onChange = {updateRegistrationFormData} />
+                <br />
+                <br />
+                
+                <label>Password: </label>
+                <input type = "password" name = "password" value = {registrationFormData.password}  onChange = {updateRegistrationFormData} />
+                <br />
+                <br />
 
-            <label>Last name: </label>
-            <input name = "last_name" value = {registrationFormData.last_name}  onChange = {updateRegistrationFormData} />
-            <br />
-            <br />
+                <label>Confirm password: </label>
+                <input type = "password" name = "password_confirmation" value = {registrationFormData.password_confirmation}  onChange = {updateRegistrationFormData} />
+                <br />
+                <br />
 
-            <label>Username: </label>
-            <input name = "username" value = {registrationFormData.username}  onChange = {updateRegistrationFormData} />
-            <br />
-            <br />
-            
-            <label>Password: </label>
-            <input type = "password" name = "password" value = {registrationFormData.password}  onChange = {updateRegistrationFormData} />
-            <br />
-            <br />
+                <button>Submit</button>
+            </form>
 
-            <label>Confirm password: </label>
-            <input type = "password" name = "password_confirmation" value = {registrationFormData.password_confirmation}  onChange = {updateRegistrationFormData} />
-            <br />
-            <br />
-
-            <button>Submit</button>
-        </form>
-
-        <form></form>
-        </div>
-    );
+            <form></form>
+            </div>
+        );
+    }
+    else {
+        return (
+            <div>
+                <h2>Account successfully created</h2>
+                <p>Click <Link to="/">here</Link> to login</p>
+            </div>
+        )
+    }
 }
 
 export default RegistrationScreen;

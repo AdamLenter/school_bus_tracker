@@ -18,7 +18,7 @@ function HomeScreen({updateFormData}) {
   return (
     <div className="App">
       <h1>School Bus Tracker</h1>
-      <img src={logo} />
+      <img src={logo} alt = "cartoon school bus" />
       <h2>Returning User?</h2>
       <form>
         <label>Username: </label>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_02_140454) do
+ActiveRecord::Schema.define(version: 2022_06_03_174355) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,7 +64,7 @@ ActiveRecord::Schema.define(version: 2022_06_02_140454) do
   create_table "drivers", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.integer "user_account_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
@@ -79,7 +79,7 @@ ActiveRecord::Schema.define(version: 2022_06_02_140454) do
   create_table "parents", force: :cascade do |t|
     t.string "first_name"
     t.string "last_name"
-    t.integer "user_account_id"
+    t.integer "user_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

@@ -19,6 +19,10 @@ function App() {
       .then((r)=>r.json())
       .then((busList) => setBuses(busList))
       }, [])
+
+  if(buses) {
+    console.log("Hello");
+  }
   
   return (
     <div className="App">
