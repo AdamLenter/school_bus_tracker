@@ -5,14 +5,12 @@ import { Link } from 'react-router-dom/cjs/react-router-dom.min';
 import DisplayErrors from './DisplayErrors';
 
 
-function HomeScreen({updateFormData}) {
+function HomeScreen({ setUser, updateFormData}) {
   const blankLoginFormData = {
     username: "", 
     password: ""
   }
   const [loginFormData, setLoginFormData] = useState(blankLoginFormData);
-
-  const [user, setUser] = useState({});
 
   const [loginErrors, setLoginErrors] = useState([]);
 
@@ -36,7 +34,7 @@ function HomeScreen({updateFormData}) {
           }
       })
     }
-console.log(user)
+    
   return (
     <div className="App">
       <h1>School Bus Tracker</h1>
