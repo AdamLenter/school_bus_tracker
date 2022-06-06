@@ -14,4 +14,6 @@ Rails.application.routes.draw do
   get 'buses', to: 'buses#index'
 
   post 'users', to: 'special#create'
+
+  post "/login", to: "sessions#create"
 end

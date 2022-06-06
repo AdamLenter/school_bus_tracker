@@ -8,7 +8,8 @@ function RegistrationScreen({ updateFormData }) {
     const [registrationFormData, setRegistrationFormData] = useState({
         first_name: "",
         last_name: "", 
-        user_type: "Parent", 
+        parent: true,
+        driver: false,  
         username: "", 
         password: "",
         password_confirmation: ""
@@ -45,10 +46,18 @@ console.log(userCreated)
             <h1>Create Account</h1>
             {registrationErrors.length > 0 ? <DisplayErrors errors = {registrationErrors} /> : null}
             <form onSubmit={handleSubmit}>
-                <label>I am a: </label>
-                <select name = "user_type" value = {registrationFormData.user_type} onChange = {updateRegistrationFormData}>
-                    <option value = "Parent">Parent</option>
-                    <option value = "Driver">Driver</option>
+                <label>I am a parent: </label>
+                <select name = "parent" value = {registrationFormData.parent} onChange = {updateRegistrationFormData}>
+                    <option value = {true}>Yes</option>
+                    <option value = {false}>No</option>
+                </select>
+                <br />
+                <br />
+
+                <label>I am a driver: </label>
+                <select name = "driver" value = {registrationFormData.driver} onChange = {updateRegistrationFormData}>
+                    <option value = {true}>Yes</option>
+                    <option value = {false}>No</option>
                 </select>
                 <br />
                 <br />

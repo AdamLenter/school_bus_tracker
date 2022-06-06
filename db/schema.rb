@@ -10,10 +10,20 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_06_03_174355) do
+ActiveRecord::Schema.define(version: 2022_06_06_140138) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "adult_contacts", force: :cascade do |t|
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.boolean "parent"
+    t.boolean "driver"
+  end
 
   create_table "bus_routes", force: :cascade do |t|
     t.string "name"
@@ -61,31 +71,15 @@ ActiveRecord::Schema.define(version: 2022_06_03_174355) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "drivers", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "drivers_and_bus_routes", force: :cascade do |t|
-    t.integer "driver_id"
+    t.integer "adult_contact_id"
     t.integer "bus_route_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "parents", force: :cascade do |t|
-    t.string "first_name"
-    t.string "last_name"
-    t.integer "user_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "parents_and_students", force: :cascade do |t|
-    t.integer "parent_id"
+    t.integer "adult_contact_id"
     t.integer "student_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false

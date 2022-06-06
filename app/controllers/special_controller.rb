@@ -2,12 +2,8 @@ class SpecialController < ApplicationController
     def create
         user = User.create(user_params)
         if user.valid?
-            if params[:user_type] === "Parent"
-                user.parent = Parent.create(parent_driver_params)
-            else
-                user.driver = Driver.create(parent_driver_params)
-            end
-            render json: user, status: :created
+           user.adult_contact = AdultContact.create(adult_contact_params)
+           render json: user, status: :created
         else
             render json: { errors: user.errors.full_messages }, status: :unprocessable_entity
         end
@@ -19,8 +15,8 @@ class SpecialController < ApplicationController
         params.permit(:username, :password, :password_confirmation)
     end
 
-    def parent_driver_params
-        params.permit(:first_name, :last_name)
+    def adult_contact_params
+        params.permit(:first_name, :last_name, :parent, :driver)
     end
         
 end

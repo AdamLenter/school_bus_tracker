@@ -5,7 +5,6 @@ class User < ApplicationRecord
     validates :username, uniqueness: true
 
     validates :password, presence: true
-    has_one :parent
-    has_one :driver
+    has_one :adult_contact
     
 end
