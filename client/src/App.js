@@ -17,6 +17,17 @@ function App() {
   }
 
   useEffect(()=> {
+    fetch("/me")
+    .then((r)=>r.json())
+    .then((userInfo)=>{
+      console.log(userInfo);
+      if(userInfo['username']) {
+        setUser(userInfo);
+      }
+  })
+}, [])
+  
+  useEffect(()=> {
     fetch("/buses")
       .then((r)=>r.json())
       .then((busList) => setBuses(busList))
@@ -30,9 +41,9 @@ function App() {
         </Route>
         
         <Route exact path = "/">
-          {user['adult_contact'] ? 
+          {!user['adult_contact'] ? 
             <HomeScreen setUser = {setUser} updateFormData={updateFormData} /> : 
-            <LoggedInUserWelcomeScreen user = {user} />
+            <LoggedInUserWelcomeScreen user = {user} setUser = {setUser} />
           }
         </Route>
       </BrowserRouter>
