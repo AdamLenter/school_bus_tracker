@@ -1,11 +1,16 @@
 import '../App.css';
 import React from 'react';
+import ChildProfileInfo from './ChildProfileInfo';
 
-function ProfileChildSection({ user }) {
+function ProfileChildSection({ students }) {
     
     return (
         <div>
-            <h2>My Children</h2>
+            <br />
+            <h2>My Students</h2>
+            {students.length > 0 ? 
+                students.map((student)=><ChildProfileInfo key = {student.id} student = {student} />) : 
+                <p>(No children to display)</p>}
         </div>
     );
 }

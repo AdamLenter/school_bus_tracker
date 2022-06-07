@@ -16,7 +16,7 @@ function MyProfileScreen({ user } ) {
                     <strong>Last name: </strong>{user.adult_contact.last_name}
                 </p>
 
-                {user.adult_contact.parent ? <ProfileChildSection /> : null}
+                {user.adult_contact.parent ? <ProfileChildSection students = {user.students} /> : null}
         
             </div>
         );
