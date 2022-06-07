@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
 
   get '/me/', to: 'users#show'
+  get '/schools', to: 'schools#index'
   get '/buses', to: 'buses#index'
 
   post '/users', to: 'special#create'

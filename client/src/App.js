@@ -8,6 +8,7 @@ import MyProfileScreen from './components/MyProfileScreen';
 
 function App() {
 
+  const [schools, setSchools] = useState([]);
   const [buses, setBuses] = useState([]);
   const [user, setUser] = useState({});
 
@@ -28,6 +29,14 @@ function App() {
 }, [])
   
   useEffect(()=> {
+    fetch("/schools")
+      .then((r)=>r.json())
+      .then((schoolList) => setSchools(schoolList))
+      }, [])
+
+      console.log(schools);
+
+  useEffect(()=> {
     fetch("/buses")
       .then((r)=>r.json())
       .then((busList) => setBuses(busList))
@@ -38,6 +47,10 @@ function App() {
       <BrowserRouter>
         <Route exact path = "/register">
           <RegistrationScreen updateFormData={updateFormData} />
+        </Route>
+        
+        <Route exact path = "/MyProfile">
+          <MyProfileScreen user = {user} />
         </Route>
         
         <Route exact path = "/MyProfile">
