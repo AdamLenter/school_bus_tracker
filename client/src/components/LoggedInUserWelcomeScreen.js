@@ -3,12 +3,12 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 function LoggedInUserWelcomeScreen({ user, setUser }) {
-    console.log(user);
-
+    
     function handleLogout() {
         fetch("/logout", {
             method: "DELETE"})
             .then (()=>setUser({}))
+            .then (()=>console.log(user))
         }
 
     return (
