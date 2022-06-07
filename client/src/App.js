@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import HomeScreen from './components/HomeScreen';
 import RegistrationScreen from './components/RegistrationScreen';
 import LoggedInUserWelcomeScreen from './components/LoggedInUserWelcomeScreen';
+import MyProfileScreen from './components/MyProfileScreen';
 
 function App() {
 
@@ -20,7 +21,6 @@ function App() {
     fetch("/me")
     .then((r)=>r.json())
     .then((userInfo)=>{
-      console.log(userInfo);
       if(userInfo['username']) {
         setUser(userInfo);
       }
@@ -40,12 +40,17 @@ function App() {
           <RegistrationScreen updateFormData={updateFormData} />
         </Route>
         
+        <Route exact path = "/MyProfile">
+          <MyProfileScreen user = {user} />
+        </Route>
+
         <Route exact path = "/">
           {!user['adult_contact'] ? 
             <HomeScreen setUser = {setUser} updateFormData={updateFormData} /> : 
             <LoggedInUserWelcomeScreen user = {user} setUser = {setUser} />
           }
         </Route>
+        
       </BrowserRouter>
     </div>
   )

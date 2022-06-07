@@ -6,5 +6,5 @@ class User < ApplicationRecord
 
     validates :password, presence: true
     has_one :adult_contact
-    
+    has_many :students, through: :adult_contact
 end

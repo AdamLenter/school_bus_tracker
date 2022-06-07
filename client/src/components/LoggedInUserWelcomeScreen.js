@@ -15,7 +15,7 @@ function LoggedInUserWelcomeScreen({ user, setUser }) {
         <div>
             <h1>Welcome, {user['adult_contact']['first_name']}</h1>
             <p>
-                <Link to="/myProfile">View my profile</Link>
+                <Link to="/MyProfile">View my profile</Link>
             </p>
                 
                 {user['adult_contact']['parent'] ? 
