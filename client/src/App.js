@@ -5,16 +5,26 @@ import HomeScreen from './components/HomeScreen';
 import RegistrationScreen from './components/RegistrationScreen';
 import LoggedInUserWelcomeScreen from './components/LoggedInUserWelcomeScreen';
 import MyProfileScreen from './components/MyProfileScreen';
+import AddStudentForm from './components/AddStudentForm';
 
 function App() {
 
   const [schools, setSchools] = useState([]);
+  const [defaultSchoolId, setDefaultSchoolId] = useState(null);
   const [buses, setBuses] = useState([]);
+  const [busRoutes, setBusRoutes] = useState([]);
   const [user, setUser] = useState({});
 
   function updateFormData(formData, event) {
     let updatedFormData = {...formData};
-    updatedFormData[event.target.name] = event.target.value;
+    
+    if(event.target.type.includes("select")) {
+      updatedFormData[event.target.name] = Number(event.target.value);
+    }
+    else {
+      updatedFormData[event.target.name] = event.target.value;
+    }
+    
     return updatedFormData;
   }
 
@@ -31,15 +41,22 @@ function App() {
   useEffect(()=> {
     fetch("/schools")
       .then((r)=>r.json())
-      .then((schoolList) => setSchools(schoolList))
-      }, [])
-
-      console.log(schools);
+      .then((schoolList) => {
+        setSchools(schoolList);
+        setDefaultSchoolId(schoolList[0].id)
+      })
+    }, [])
 
   useEffect(()=> {
     fetch("/buses")
       .then((r)=>r.json())
       .then((busList) => setBuses(busList))
+      }, [])
+
+  useEffect(()=> {
+    fetch("/bus_routes")
+      .then((r)=>r.json())
+      .then((busRouteList) => setBusRoutes(busRouteList))
       }, [])
   
   return (
@@ -53,8 +70,8 @@ function App() {
           <MyProfileScreen user = {user} />
         </Route>
         
-        <Route exact path = "/MyProfile">
-          <MyProfileScreen user = {user} />
+        <Route exact path = "/AddStudentForm">
+          <AddStudentForm user = {user} schools = {schools} busRoutes = {busRoutes} defaultSchoolId = {defaultSchoolId} updateFormData = {updateFormData} />
         </Route>
 
         <Route exact path = "/">
