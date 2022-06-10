@@ -18,7 +18,7 @@ function ProfileChildSection({ students }) {
                 <p>(No children to display)</p>}
 
             <br />
-            Click <Link to = "/AddStudentForm">here</Link> to add a student.
+            Click <Link to = "/AddStudentForm">here</Link> to add a student
         </div>
     );
 }

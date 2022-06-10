@@ -1,6 +1,7 @@
 import '../App.css';
 import React from 'react';
 import ProfileChildSection from './ProfileChildSection';
+import { Link } from 'react-router-dom';
 
 function MyProfileScreen({ user } ) {
     console.log(user);
@@ -17,6 +18,10 @@ function MyProfileScreen({ user } ) {
                 </p>
 
                 {user.adult_contact.parent ? <ProfileChildSection students = {user.students} /> : null}
+
+                <br />
+
+                <p>Click <Link to = "/">here</Link> to return to the home screen</p>
         
             </div>
         );
