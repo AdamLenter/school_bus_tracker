@@ -2,6 +2,7 @@ import '../App.css';
 import React from 'react';
 import ProfileChildSection from './ProfileChildSection';
 import { Link } from 'react-router-dom';
+import ProfileBusSection from './ProfileBusSection';
 
 function MyProfileScreen({ user } ) {
     console.log(user);
@@ -19,7 +20,7 @@ function MyProfileScreen({ user } ) {
 
                 {user.adult_contact.parent ? <ProfileChildSection students = {user.students} /> : null}
 
-                <br />
+                {user.adult_contact.driver ? <ProfileBusSection buses = {user.adult_contact.buses} /> : null}
 
                 <p>Click <Link to = "/">here</Link> to return to the home screen</p>
         
