@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   get '/schools', to: 'schools#index'
   get '/buses', to: 'buses#index'
   get '/bus_routes', to: 'bus_routes#index'
+  get '/bus_stops', to: 'bus_stops#index'
 
   post '/users', to: 'special#create'
 

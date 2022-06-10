@@ -11,8 +11,8 @@ function App() {
 
   const [schools, setSchools] = useState([]);
   const [defaultSchoolId, setDefaultSchoolId] = useState(null);
-  const [buses, setBuses] = useState([]);
   const [busRoutes, setBusRoutes] = useState([]);
+  const [busStops, setBusStops] = useState([]);
   const [user, setUser] = useState({});
 
   function updateFormData(formData, event) {
@@ -48,9 +48,9 @@ function App() {
     }, [])
 
   useEffect(()=> {
-    fetch("/buses")
+    fetch("/bus_stops")
       .then((r)=>r.json())
-      .then((busList) => setBuses(busList))
+      .then((busStopList) => setBusStops(busStopList))
       }, [])
 
   useEffect(()=> {
@@ -58,7 +58,7 @@ function App() {
       .then((r)=>r.json())
       .then((busRouteList) => setBusRoutes(busRouteList))
       }, [])
-  
+  console.log(busStops);
   return (
     <div className="App">
       <BrowserRouter>
@@ -71,7 +71,7 @@ function App() {
         </Route>
         
         <Route exact path = "/AddStudentForm">
-          <AddStudentForm user = {user} schools = {schools} busRoutes = {busRoutes} defaultSchoolId = {defaultSchoolId} updateFormData = {updateFormData} />
+          <AddStudentForm user = {user} schools = {schools} busRoutes = {busRoutes} busStops = {busStops} defaultSchoolId = {defaultSchoolId} updateFormData = {updateFormData} />
         </Route>
 
         <Route exact path = "/">

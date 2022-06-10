@@ -39,6 +39,30 @@ BusRoute.create({id: 16, name: "Port Washington Estates", bus_id: 4, school_id: 
 BusRoute.create({id: 17, name: "Baxter Estates", bus_id: 5, school_id: 4})
 BusRoute.create({id: 18, name: "Main Street", bus_id: 6, school_id: 4})
 
+BusStop.create({id: 1, bus_route_id: 1, location_description: "Intersection of Bar Beach Rd. and Orchard St.", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+BusStop.create({id: 2, bus_route_id: 2, location_description: "Intersection of Park Ave. and Orchard St.", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+BusStop.create({id: 3, bus_route_id: 3, location_description: "123 Soundview Dr.", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+BusStop.create({id: 4, bus_route_id: 4, location_description: "Intersection of Mackey and Davis", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+BusStop.create({id: 5, bus_route_id: 5, location_description: "In front of library", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+BusStop.create({id: 6, bus_route_id: 6, location_description: "Intersection of S. Bayles and Main St.", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+
+BusStop.create({id: 7, bus_route_id: 7, location_description: "Intersection of Shadyside Ave. and Radcliff Ave.", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+BusStop.create({id: 8, bus_route_id: 8, location_description: "Intersection of Shadyside Ave. and Avenue C", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+BusStop.create({id: 9, bus_route_id: 9, location_description: "Intersection of Soundview Dr. and Angler Ln.", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+BusStop.create({id: 10, bus_route_id: 10, location_description: "Intersection of Ivy Way and Mitchell Rd.", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+BusStop.create({id: 11, bus_route_id: 11, location_description: "Intersection of Hilltop Ave. and Overlook Dr.", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+BusStop.create({id: 12, bus_route_id: 12, location_description: "Intersection of Main St. and Monroe St.", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+
+BusStop.create({id: 13, bus_route_id: 13, location_description: "Intersection of Haraborhills Dr. and Shadyside Ave.", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+BusStop.create({id: 14, bus_route_id: 14, location_description: "Intersection of Radcliffe Ave. and Poplar Pl.", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+BusStop.create({id: 15, bus_route_id: 15, location_description: "Intersection of Sandy Ct. and Seagull Ln.", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+BusStop.create({id: 16, bus_route_id: 16, location_description: "Intersection of Bayview Ave. and N. Plandome Rd.", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+BusStop.create({id: 17, bus_route_id: 17, location_description: "Intersection of Central Dr. and Ridgeway Rd.", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+BusStop.create({id: 18, bus_route_id: 18, location_description: "Intersection of Main St. and Mackey St.", expected_pick_up_time: "07:50:00", expected_drop_off_time: "15:03:00"})
+
+
+BusStop.create({id: 19, bus_route_id: 1, location_description: "Intersection of Bar Beach Rd. and Elm St.", expected_pick_up_time: "07:52:00", expected_drop_off_time: "15:05:00"})
+
 
 
 puts "Done seeding"
