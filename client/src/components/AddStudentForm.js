@@ -42,6 +42,7 @@ function AddStudentForm({ user, setUser, schools, busRoutes, busStops, updateFor
                     updatedUser.students = updatedStudents;
                     setUser(updatedUser);
                     setStudentAddSuccessful(true);
+                    setAddStudentErrors(false);
                 })
             } else {
               response.json().then((errorData) => setAddStudentErrors(errorData.errors));
