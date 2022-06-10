@@ -58,7 +58,7 @@ function App() {
       .then((r)=>r.json())
       .then((busRouteList) => setBusRoutes(busRouteList))
       }, [])
-  console.log(busStops);
+      
   return (
     <div className="App">
       <BrowserRouter>

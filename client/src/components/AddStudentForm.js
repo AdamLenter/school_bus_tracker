@@ -1,16 +1,43 @@
 import '../App.css';
 import React, { useState } from 'react';
+import { useHistory } from 'react-router-dom';
+import reactRouterDom from 'react-router-dom';
+import DisplayErrors from './DisplayErrors';
 
-function AddStudentForm({ user, schools, busRoutes, updateFormData }) {
+function AddStudentForm({ user, schools, busRoutes, busStops, updateFormData }) {
+    const[addStudentErrors, setAddStudentErrors] = useState([]);
+    const[studentAddSuccessful, setStudentAddSuccessful] = useState(false);
+
     const [addStudentFormData, setAddStudentFormData] = useState({
         firstName: "",
         lastName: "", 
         schoolId: null, 
-        busRouteId: null
+        busRouteId: null, 
+        busStopId: null
     })
     
-    function handleAddStudentForm(event) {
+    function handleSubmitAddStudentForm(event) {
         event.preventDefault();
+
+        const newStudentInfo = {
+            first_name: addStudentFormData.firstName, 
+            last_name: addStudentFormData.lastName, 
+            bus_stop_id: addStudentFormData.busStopId, 
+            adult_contact_id: user.adult_contact.id
+        }
+        
+        fetch("/students", {
+            method: "POST", 
+            headers: {"Content-Type": "application/json"}, 
+            body: JSON.stringify(newStudentInfo)
+        })
+        .then((response) => {
+            if (response.ok) {
+                setStudentAddSuccessful(true);
+            } else {
+              response.json().then((errorData) => setAddStudentErrors(errorData.errors));
+            }
+        })
     }
 
     function handleAddStudentFormChange(event) {
@@ -18,6 +45,11 @@ function AddStudentForm({ user, schools, busRoutes, updateFormData }) {
 
         if(event.target.name === "schoolId") {
             updatedAddStudentFormData.busRouteId = updateDefaultBusRouteId(Number(event.target.value));
+            updatedAddStudentFormData.busStopId = updateDefaultBusStopId(Number(updatedAddStudentFormData.busRouteId));
+        }
+
+        else if(event.target.name === "busRouteId") {
+            updatedAddStudentFormData.busStopId = updateDefaultBusStopId(Number(updatedAddStudentFormData.busRouteId));
         }
         setAddStudentFormData(updatedAddStudentFormData);
     }
@@ -27,7 +59,11 @@ function AddStudentForm({ user, schools, busRoutes, updateFormData }) {
         return busRoutes.find((busRoute)=>busRoute.school_id === selectedSchoolId).id;
     }
 
-    if(schools.length > 0 && busRoutes.length > 0 && !addStudentFormData.busRouteId)
+    function updateDefaultBusStopId(selectedBusStopId) {
+        return busStops.find((busStop)=>busStop.bus_route_id === selectedBusStopId).id;
+    }
+
+    if(schools.length > 0 && busRoutes.length > 0 && busStops.length > 0 && !addStudentFormData.busStopId)
         {
         let updatedAddStudentFormData = {...addStudentFormData};
 
@@ -35,53 +71,80 @@ function AddStudentForm({ user, schools, busRoutes, updateFormData }) {
 
         updatedAddStudentFormData.busRouteId = updateDefaultBusRouteId(updatedAddStudentFormData.schoolId);
 
+        updatedAddStudentFormData.busStopId = updateDefaultBusStopId(updatedAddStudentFormData.busRouteId);
+
         setAddStudentFormData(updatedAddStudentFormData);
         }
 
+    if(!studentAddSuccessful) {
+        return (
+            <div>
+                <h1>Add a Student</h1>
+                {addStudentErrors.length > 0 ? <DisplayErrors errors = {addStudentErrors} /> : null}
+                <form onSubmit={handleSubmitAddStudentForm}>
+                    <label>First name: </label>
+                    <input name = "firstName" value = {addStudentFormData.firstName} onChange = {handleAddStudentFormChange} />
+                    <br />
+                    <br />
 
-console.log(addStudentFormData);
-    return (
-        <div>
-            <h1>Add a Student</h1>
-            <form onSubmit={handleAddStudentForm}>
-                <label>First name: </label>
-                <input name = "firstName" value = {addStudentFormData.firstName} onChange = {handleAddStudentFormChange} />
-                <br />
-                <br />
+                    <label>Last name: </label>
+                    <input name = "lastName" value = {addStudentFormData.lastName} onChange = {handleAddStudentFormChange} />
+                    <br />
+                    <br />
 
-                <label>Last name: </label>
-                <input name = "lastName" value = {addStudentFormData.lastName} onChange = {handleAddStudentFormChange} />
-                <br />
-                <br />
+                    <label>School: </label>
+                    <select name = "schoolId" value = {addStudentFormData.schoolId} onChange = {handleAddStudentFormChange}>
+                        {addStudentFormData.schoolId ? 
+                            schools.map((school) => <option key = {school.id} value = {school.id}>{school.name}</option>) :
+                            <option disabled>Loading...</option>}
+                    </select>
+                    <br />
+                    <br />
 
-                <label>School: </label>
-                <select name = "schoolId" value = {addStudentFormData.schoolId} onChange = {handleAddStudentFormChange}>
-                    {addStudentFormData.schoolId ? 
-                        schools.map((school) => <option key = {school.id} value = {school.id}>{school.name}</option>) :
-                        <option disabled>Loading...</option>}
-                </select>
-                <br />
-                <br />
+                    <label>Bus Route: </label>
+                    <select name = "busRouteId" value = {addStudentFormData.busRouteId} onChange = {handleAddStudentFormChange}>
+                        {addStudentFormData.busRouteId ? 
+                            busRoutes.map((busRoute) => {
+                                if(busRoute.school_id === addStudentFormData.schoolId) {
+                                    return <option key = {busRoute.id} value = {busRoute.id}>{busRoute.name}</option>
+                                }
+                                else {
+                                    return null;
+                                }
+                            }) :
+                            <option disabled>Loading...</option>}
+                    </select>
+                    <br />
+                    <br />
 
-                <label>Bus Route: </label>
-                <select name = "busRouteId" value = {addStudentFormData.busRouteId} onChange = {handleAddStudentFormChange}>
-                    {addStudentFormData.busRouteId ? 
-                        busRoutes.map((busRoute) => {
-                            if(busRoute.school_id === addStudentFormData.schoolId) {
-                                return <option key = {busRoute.id} value = {busRoute.id}>{busRoute.name}</option>
-                            }
-                            else {
-                                return null;
-                            }
-                        }) :
-                        <option disabled>Loading...</option>}
-                </select>
-                <br />
-                <br />
-
-            </form>
-        </div>
-    );
+                    <label>Bus Stop: </label>
+                    <select name = "busStopId" value = {addStudentFormData.busStopId} onChange = {handleAddStudentFormChange}>
+                        {addStudentFormData.busStopId ? 
+                            busStops.map((busStop) => {
+                                if(busStop.bus_route_id === addStudentFormData.busRouteId) {
+                                    return <option key = {busStop.id} value = {busStop.id}>{busStop.location_description}</option>
+                                }
+                                else {
+                                    return null;
+                                }
+                            }) :
+                            <option disabled>Loading...</option>}
+                    </select>
+                    <br />
+                    <br />
+                    <button type = "submit">Submit</button>
+                </form>
+            </div>
+        );
+    }
+    else {
+        return(
+            <div>
+                <h1>Add a Student</h1>
+                <p><strong>New student successfully added.</strong></p>
+            </div>
+        )
+    }
 }
 
 export default AddStudentForm;

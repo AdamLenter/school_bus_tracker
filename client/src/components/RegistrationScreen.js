@@ -39,7 +39,7 @@ function RegistrationScreen({ updateFormData }) {
             }
         })
     }
-console.log(userCreated)
+    
     if(!userCreated) {
         return (
             <div>
