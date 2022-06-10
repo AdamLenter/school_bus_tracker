@@ -1,2 +1,0 @@
-class DriversAndBusRoutesController < ApplicationController
-end

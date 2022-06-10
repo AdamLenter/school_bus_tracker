@@ -1,2 +1,0 @@
-class DriversAndBusRoute < ApplicationRecord
-end
