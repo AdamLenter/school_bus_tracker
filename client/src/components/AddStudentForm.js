@@ -149,6 +149,8 @@ function AddStudentForm({ user, setUser, schools, busRoutes, busStops, updateFor
                     <br />
                     <button type = "submit">Submit</button>
                 </form>
+                <br />
+                <p>Click <Link to = "/MyProfile">here</Link> to return to your profile</p>
             </div>
         );
     }
