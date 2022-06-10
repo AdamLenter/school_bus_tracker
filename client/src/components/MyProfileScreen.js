@@ -3,7 +3,7 @@ import React from 'react';
 import ProfileChildSection from './ProfileChildSection';
 
 function MyProfileScreen({ user } ) {
-    
+    console.log(user);
     if(user.adult_contact) {
         return (
             <div>

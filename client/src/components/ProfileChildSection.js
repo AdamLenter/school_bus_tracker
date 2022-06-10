@@ -10,7 +10,11 @@ function ProfileChildSection({ students }) {
             <br />
             <h2>My Students</h2>
             {students.length > 0 ? 
-                students.map((student)=><ChildProfileInfo key = {student.id} student = {student} />) : 
+                students.map((student)=>(
+                    <div key = {student.id} >
+                        <ChildProfileInfo student = {student} />
+                        <br />
+                    </div>)) : 
                 <p>(No children to display)</p>}
 
             <br />

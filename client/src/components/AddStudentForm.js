@@ -1,25 +1,27 @@
 import '../App.css';
 import React, { useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import reactRouterDom from 'react-router-dom';
 import DisplayErrors from './DisplayErrors';
+import { Link } from 'react-router-dom';
 
-function AddStudentForm({ user, schools, busRoutes, busStops, updateFormData }) {
+function AddStudentForm({ user, setUser, schools, busRoutes, busStops, updateFormData }) {
     const[addStudentErrors, setAddStudentErrors] = useState([]);
     const[studentAddSuccessful, setStudentAddSuccessful] = useState(false);
 
-    const [addStudentFormData, setAddStudentFormData] = useState({
+    const blankFormData = {
         firstName: "",
         lastName: "", 
         schoolId: null, 
         busRouteId: null, 
         busStopId: null
-    })
-    
+    };
+
+    const [addStudentFormData, setAddStudentFormData] = useState(blankFormData);
+
     function handleSubmitAddStudentForm(event) {
         event.preventDefault();
 
-        const newStudentInfo = {
+        let newStudentInfo = {
             first_name: addStudentFormData.firstName, 
             last_name: addStudentFormData.lastName, 
             bus_stop_id: addStudentFormData.busStopId, 
@@ -33,7 +35,14 @@ function AddStudentForm({ user, schools, busRoutes, busStops, updateFormData }) 
         })
         .then((response) => {
             if (response.ok) {
-                setStudentAddSuccessful(true);
+                response.json().then((createdStudent)=>{
+                    let updatedUser = {...user};
+                    let updatedStudents = [...user.students, createdStudent];
+
+                    updatedUser.students = updatedStudents;
+                    setUser(updatedUser);
+                    setStudentAddSuccessful(true);
+                })
             } else {
               response.json().then((errorData) => setAddStudentErrors(errorData.errors));
             }
@@ -61,6 +70,11 @@ function AddStudentForm({ user, schools, busRoutes, busStops, updateFormData }) 
 
     function updateDefaultBusStopId(selectedBusStopId) {
         return busStops.find((busStop)=>busStop.bus_route_id === selectedBusStopId).id;
+    }
+
+    function handleAddAdditionalUser() {
+        setAddStudentFormData(blankFormData);
+        setStudentAddSuccessful(false);
     }
 
     if(schools.length > 0 && busRoutes.length > 0 && busStops.length > 0 && !addStudentFormData.busStopId)
@@ -142,6 +156,8 @@ function AddStudentForm({ user, schools, busRoutes, busStops, updateFormData }) 
             <div>
                 <h1>Add a Student</h1>
                 <p><strong>New student successfully added.</strong></p>
+                <p>Click <Link to = "/MyProfile">here</Link> to return to your profile</p>
+                <p>Click <Link to = "/AddStudentForm" onClick = {handleAddAdditionalUser}>here</Link> to add another student.</p>
             </div>
         )
     }

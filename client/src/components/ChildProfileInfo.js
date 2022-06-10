@@ -2,7 +2,6 @@ import '../App.css';
 import React from 'react';
 
 function ChildProfileInfo({ student }) {
-    console.log(student);
     
     return (
         <div>

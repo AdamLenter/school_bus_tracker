@@ -71,7 +71,7 @@ function App() {
         </Route>
         
         <Route exact path = "/AddStudentForm">
-          <AddStudentForm user = {user} schools = {schools} busRoutes = {busRoutes} busStops = {busStops} defaultSchoolId = {defaultSchoolId} updateFormData = {updateFormData} />
+          <AddStudentForm user = {user} setUser = {setUser} schools = {schools} busRoutes = {busRoutes} busStops = {busStops} defaultSchoolId = {defaultSchoolId} updateFormData = {updateFormData} />
         </Route>
 
         <Route exact path = "/">
