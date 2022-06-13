@@ -6,13 +6,14 @@ import RegistrationScreen from './components/RegistrationScreen';
 import LoggedInUserWelcomeScreen from './components/LoggedInUserWelcomeScreen';
 import MyProfileScreen from './components/MyProfileScreen';
 import AddStudentForm from './components/AddStudentForm';
+import AddBusForm from './components/AddBusForm';
 
 function App() {
 
   const [schools, setSchools] = useState([]);
-  const [defaultSchoolId, setDefaultSchoolId] = useState(null);
   const [busRoutes, setBusRoutes] = useState([]);
   const [busStops, setBusStops] = useState([]);
+  const [buses, setBuses] = useState([]);
   const [user, setUser] = useState({});
 
   function updateFormData(formData, event) {
@@ -43,21 +44,21 @@ function App() {
       .then((r)=>r.json())
       .then((schoolList) => {
         setSchools(schoolList);
-        setDefaultSchoolId(schoolList[0].id)
-      })
+      }).then(()=> {
+          fetch("/bus_stops")
+          .then((r)=>r.json())
+          .then((busStopList) => setBusStops(busStopList))
+          }).then(()=> {
+              fetch("/bus_routes")
+              .then((r)=>r.json())
+              .then((busRouteList) => setBusRoutes(busRouteList))
+            }).then(()=> {
+              fetch("/buses")
+              .then((r)=>r.json())
+              .then((busList) => setBuses(busList))
+            })
     }, [])
 
-  useEffect(()=> {
-    fetch("/bus_stops")
-      .then((r)=>r.json())
-      .then((busStopList) => setBusStops(busStopList))
-      }, [])
-
-  useEffect(()=> {
-    fetch("/bus_routes")
-      .then((r)=>r.json())
-      .then((busRouteList) => setBusRoutes(busRouteList))
-      }, [])
       
   return (
     <div className="App">
@@ -71,7 +72,11 @@ function App() {
         </Route>
         
         <Route exact path = "/AddStudentForm">
-          <AddStudentForm user = {user} setUser = {setUser} schools = {schools} busRoutes = {busRoutes} busStops = {busStops} defaultSchoolId = {defaultSchoolId} updateFormData = {updateFormData} />
+          <AddStudentForm user = {user} setUser = {setUser} schools = {schools} busRoutes = {busRoutes} busStops = {busStops} updateFormData = {updateFormData} />
+        </Route>
+
+        <Route exact path = "/AddBusForm">
+          <AddBusForm user = {user} setUser = {setUser} buses = {buses} updateFormData = {updateFormData} />
         </Route>
 
         <Route exact path = "/">

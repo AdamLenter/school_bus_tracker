@@ -19,6 +19,8 @@ function ProfileBusSection({ buses }) {
 
             <br />
             Click <Link to = "/AddBusForm">here</Link> to add a bus
+            <br />
+            <br />
         </div>
     );
 }

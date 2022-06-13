@@ -19,6 +19,7 @@ Rails.application.routes.draw do
 
   post '/users', to: 'special#create'
   post '/students', to: 'student#create'
+  post '/driver_buses', to: 'driver_buses#create'
 
   post "/login", to: "sessions#create"
 
