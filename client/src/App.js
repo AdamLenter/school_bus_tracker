@@ -7,6 +7,7 @@ import LoggedInUserWelcomeScreen from './components/LoggedInUserWelcomeScreen';
 import MyProfileScreen from './components/MyProfileScreen';
 import AddStudentForm from './components/AddStudentForm';
 import AddBusForm from './components/AddBusForm';
+import LogBusRouteScreen from './components/LogBusRouteScreen';
 
 function App() {
 
@@ -59,7 +60,7 @@ function App() {
             })
     }, [])
 
-      
+    console.log(user);
   return (
     <div className="App">
       <BrowserRouter>
@@ -77,6 +78,10 @@ function App() {
 
         <Route exact path = "/AddBusForm">
           <AddBusForm user = {user} setUser = {setUser} buses = {buses} updateFormData = {updateFormData} />
+        </Route>
+
+        <Route exact path = "/LogBusRoute">
+          <LogBusRouteScreen user = {user} setUser = {setUser} buses = {buses} updateFormData = {updateFormData} />
         </Route>
 
         <Route exact path = "/">

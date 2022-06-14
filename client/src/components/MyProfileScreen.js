@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import ProfileBusSection from './ProfileBusSection';
 
 function MyProfileScreen({ user } ) {
-    console.log(user);
+    
     if(user.adult_contact) {
         return (
             <div>
@@ -18,7 +18,7 @@ function MyProfileScreen({ user } ) {
                     <strong>Last name: </strong>{user.adult_contact.last_name}
                 </p>
 
-                {user.adult_contact.parent ? <ProfileChildSection students = {user.students} /> : null}
+                {user.adult_contact.parent ? <ProfileChildSection students = {user.adult_contact.students} /> : null}
 
                 {user.adult_contact.driver ? <ProfileBusSection buses = {user.adult_contact.buses} /> : null}
 
