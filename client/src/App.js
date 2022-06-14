@@ -60,7 +60,6 @@ function App() {
             })
     }, [])
 
-    console.log(user);
   return (
     <div className="App">
       <BrowserRouter>
@@ -81,7 +80,7 @@ function App() {
         </Route>
 
         <Route exact path = "/LogBusRoute">
-          <LogBusRouteScreen user = {user} setUser = {setUser} buses = {buses} updateFormData = {updateFormData} />
+          <LogBusRouteScreen user = {user} setUser = {setUser} busRoutes = {busRoutes} updateFormData = {updateFormData} />
         </Route>
 
         <Route exact path = "/">
