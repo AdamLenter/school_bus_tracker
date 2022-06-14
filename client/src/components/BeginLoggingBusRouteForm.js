@@ -23,6 +23,12 @@ function BeginLoggingBusRouteForm({ user, busRoutes, updateFormData }) {
         const newFormData = updateFormData(logRouteFormData, event);
         setLogRouteFormData(newFormData);
     }
+
+    function handleChangeToOrFromSchool(event) {
+        let updatedFormData = {...logRouteFormData}
+        updatedFormData.toOrFromSchool = event.target.value;
+        setLogRouteFormData(updatedFormData);
+    }
    
     if(logRouteFormData.busId) {
         displayedBusRoutes = busRoutes.filter((busRoute) => busRoute.bus_id === logRouteFormData.busId);
@@ -57,7 +63,7 @@ function BeginLoggingBusRouteForm({ user, busRoutes, updateFormData }) {
             <br />
 
             <label>To/from school: </label>
-            <select name = "toOrFromSchool" value = {logRouteFormData.toOrFromSchool} onChange = {handleFormChange}>
+            <select name = "toOrFromSchool" value = {logRouteFormData.toOrFromSchool} onChange = {handleChangeToOrFromSchool}>
                 <option value = "to">To</option>
                 <option value = "from">From</option>
             </select>
