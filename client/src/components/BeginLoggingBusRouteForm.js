@@ -46,10 +46,7 @@ function BeginLoggingBusRouteForm({ user, busRoutes, currentDate, setDailyRouteI
             })
             .then((response) => {
                 if (response.ok) {
-                    response.json().then((createdDailyRoute)=>{
-                        console.log(createdDailyRoute);
-                        setDailyRouteInfo(createdDailyRoute)
-                        })
+                    response.json().then((createdDailyRoute)=>setDailyRouteInfo(createdDailyRoute))
                 }
             })
         return;
