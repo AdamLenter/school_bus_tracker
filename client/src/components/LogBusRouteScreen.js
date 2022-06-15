@@ -2,16 +2,16 @@ import '../App.css';
 import React, { useState } from 'react';
 import BeginLoggingBusRouteForm from './BeginLoggingBusRouteForm';
 
-function LogBusRouteScreen({ user, busRoutes, updateFormData }) {
+function LogBusRouteScreen({ user, busRoutes, currentDate, updateFormData }) {
     
     const [dailyRouteInfo, setDailyRouteInfo] = useState({});
-
+    console.log(dailyRouteInfo);
     if(busRoutes.length > 1 && user) {
         return (
             <div>
                 <h1>Log Bus Route</h1>
-                {dailyRouteInfo ? 
-                    <BeginLoggingBusRouteForm user = {user} busRoutes = {busRoutes} updateFormData = {updateFormData} setDailyRouteInfo = {setDailyRouteInfo} /> : 
+                {!dailyRouteInfo.id ? 
+                    <BeginLoggingBusRouteForm user = {user} busRoutes = {busRoutes} currentDate = {currentDate} setDailyRouteInfo = {setDailyRouteInfo} updateFormData = {updateFormData} /> : 
                     null
                 }
                 

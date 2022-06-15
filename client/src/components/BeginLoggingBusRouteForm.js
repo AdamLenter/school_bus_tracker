@@ -1,7 +1,7 @@
 import '../App.css';
 import React, { useState } from 'react';
 
-function BeginLoggingBusRouteForm({ user, busRoutes, updateFormData }) {
+function BeginLoggingBusRouteForm({ user, busRoutes, currentDate, setDailyRouteInfo, updateFormData }) {
 
     const [logRouteFormData, setLogRouteFormData] = useState({
         busId: null, 
@@ -29,6 +29,31 @@ function BeginLoggingBusRouteForm({ user, busRoutes, updateFormData }) {
         updatedFormData.toOrFromSchool = event.target.value;
         setLogRouteFormData(updatedFormData);
     }
+
+    function createDailyBusRoute(event) {
+        event.preventDefault();
+        const formDataForDb = {
+            bus_route_id: logRouteFormData.busRouteId, 
+            adult_contact_id: user.adult_contact.id,
+            to_or_from_school: logRouteFormData.toOrFromSchool, 
+            date: currentDate
+        }
+
+        fetch("/daily_route", {
+            method: "post", 
+            headers: {"Content-type": "application/json"}, 
+            body: JSON.stringify(formDataForDb)
+            })
+            .then((response) => {
+                if (response.ok) {
+                    response.json().then((createdDailyRoute)=>{
+                        console.log(createdDailyRoute);
+                        setDailyRouteInfo(createdDailyRoute)
+                        })
+                }
+            })
+        return;
+        }
    
     if(logRouteFormData.busId) {
         displayedBusRoutes = busRoutes.filter((busRoute) => busRoute.bus_id === logRouteFormData.busId);
@@ -42,7 +67,7 @@ function BeginLoggingBusRouteForm({ user, busRoutes, updateFormData }) {
     }
     
     return (
-        <form>
+        <form onSubmit = {createDailyBusRoute}>
             <label>Bus: </label>
             <select name = "busId" value = {logRouteFormData.busId} onChange = {handleFormChange}>
                 {

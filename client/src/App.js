@@ -17,6 +17,8 @@ function App() {
   const [buses, setBuses] = useState([]);
   const [user, setUser] = useState({});
 
+  const currentDate = new Date().toISOString().split('T')[0];
+
   function updateFormData(formData, event) {
     let updatedFormData = {...formData};
     
@@ -80,7 +82,7 @@ function App() {
         </Route>
 
         <Route exact path = "/LogBusRoute">
-          <LogBusRouteScreen user = {user} setUser = {setUser} busRoutes = {busRoutes} updateFormData = {updateFormData} />
+          <LogBusRouteScreen user = {user} setUser = {setUser} busRoutes = {busRoutes} currentDate = {currentDate} updateFormData = {updateFormData} />
         </Route>
 
         <Route exact path = "/">
