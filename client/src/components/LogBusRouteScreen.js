@@ -13,7 +13,7 @@ function LogBusRouteScreen({ user, busRoutes, currentDate, updateFormData }) {
     if(dailyRouteInfo.bus_route_id) {
         busStopList = busRoutes.find((busRoute)=>busRoute.id === dailyRouteInfo.bus_route_id).bus_stops;
     }
-
+console.log(dailyRouteInfo);
     if(busStopList.length > 0) {
         let sortBy;
 

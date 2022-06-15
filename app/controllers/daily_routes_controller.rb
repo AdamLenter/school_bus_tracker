@@ -3,8 +3,8 @@ class DailyRoutesController < ApplicationController
 
 
     def create
-        daily_route = DailyRoute.create!(daily_route_params);
-        render json: daily_route, status: :created
+        daily_route = DailyRoute.first_or_create!(daily_route_params);
+        render json: daily_route, status: :ok
     end
 
     private
