@@ -47,7 +47,6 @@ function AddBusForm({ user, setUser, buses, updateFormData }) {
         .then((response) => {
             if (response.ok) {
                 response.json().then((createdBus)=>{
-                    console.log(createdBus);
                     let updatedUser = {...user};
                     let updatedAdultContact = {...user.adult_contact};
                     let updatedBuses = [...user.adult_contact.buses, createdBus.bus];

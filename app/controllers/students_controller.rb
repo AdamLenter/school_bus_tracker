@@ -8,6 +8,11 @@ class StudentsController < ApplicationController
         render json: student, status: :created
     end
 
+    def where
+        students = Student.where(adult_contact_id: params[:adult_contact_id])
+        render json: students, status: :ok
+    end
+
     private 
 
     def student_params

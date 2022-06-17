@@ -5,4 +5,5 @@ class Student < ApplicationRecord
     validates :bus_stop_id, presence: true
     
     belongs_to :adult_contact
+    belongs_to :bus_stop
 end

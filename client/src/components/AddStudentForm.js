@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import DisplayErrors from './DisplayErrors';
 import { Link } from 'react-router-dom';
 
-function AddStudentForm({ user, setUser, schools, busRoutes, busStops, updateFormData }) {
+function AddStudentForm({ user, students, setStudents, schools, busRoutes, busStops, updateFormData }) {
     const[addStudentErrors, setAddStudentErrors] = useState([]);
     const[studentAddSuccessful, setStudentAddSuccessful] = useState(false);
 
@@ -35,11 +35,9 @@ function AddStudentForm({ user, setUser, schools, busRoutes, busStops, updateFor
         .then((response) => {
             if (response.ok) {
                 response.json().then((createdStudent)=>{
-                    let updatedUser = {...user};
-                    let updatedStudents = [...user.students, createdStudent];
+                    let updatedStudents = [...students, createdStudent];
 
-                    updatedUser.students = updatedStudents;
-                    setUser(updatedUser);
+                    setStudents(updatedStudents);
                     setStudentAddSuccessful(true);
                     setAddStudentErrors(false);
                 })

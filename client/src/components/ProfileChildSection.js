@@ -3,7 +3,7 @@ import React from 'react';
 import ChildProfileInfo from './ChildProfileInfo';
 import { Link } from 'react-router-dom';
 
-function ProfileChildSection({ students }) {
+function ProfileChildSection({ students, busStops }) {
     
     return (
         <div>
@@ -12,7 +12,7 @@ function ProfileChildSection({ students }) {
             {students.length > 0 ? 
                 students.map((student)=>(
                     <div key = {student.id} >
-                        <ChildProfileInfo student = {student} />
+                        <ChildProfileInfo student = {student} busStops = {busStops} />
                         <br />
                     </div>)) : 
                 <p>(No children to display)</p>}
