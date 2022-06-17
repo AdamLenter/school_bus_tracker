@@ -16,11 +16,13 @@ Rails.application.routes.draw do
   get '/buses', to: 'buses#index'
   get '/bus_routes', to: 'bus_routes#index'
   get '/bus_stops', to: 'bus_stops#index'
+  get '/daily_route_stop_times_by_parameters/:daily_route_id', to: 'daily_route_stop_times#where'
 
   post '/users', to: 'special#create'
   post '/students', to: 'student#create'
   post '/driver_buses', to: 'driver_buses#create'
   post '/daily_route', to: 'daily_routes#create'
+  post '/daily_route_stop_times', to: 'daily_route_stop_times#create'
 
   post "/login", to: "sessions#create"
 

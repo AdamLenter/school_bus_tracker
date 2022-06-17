@@ -19,6 +19,37 @@ function App() {
 
   const currentDate = new Date().toISOString().split('T')[0];
 
+  function displayTime(rubyTime) {
+    let hours = rubyTime.substring(11, 13);
+    let minutes = rubyTime.substring(14,16);
+    const ampm = hours >= 12 ? 'pm' : 'am';
+    hours = hours % 12;
+    hours = hours ? hours : 12; // the hour '0' should be '12'
+    minutes = minutes < 10 ? '0'+minutes : minutes;
+    const strTime = hours + ':' + minutes + ' ' + ampm;
+    return strTime;
+  }
+
+  function padTo2Digits(num) {
+    return num.toString().padStart(2, '0');
+  }
+  
+  function getDateTime(date) {
+    return (
+      [
+        date.getFullYear(),
+        padTo2Digits(date.getMonth() + 1),
+        padTo2Digits(date.getDate()),
+      ].join('-') +
+      ' ' +
+      [
+        padTo2Digits(date.getHours()),
+        padTo2Digits(date.getMinutes()),
+        padTo2Digits(date.getSeconds()),
+      ].join(':')
+    );
+  }
+
   function updateFormData(formData, event) {
     let updatedFormData = {...formData};
     
@@ -82,7 +113,7 @@ function App() {
         </Route>
 
         <Route exact path = "/LogBusRoute">
-          <LogBusRouteScreen user = {user} setUser = {setUser} busRoutes = {busRoutes} currentDate = {currentDate} updateFormData = {updateFormData} />
+          <LogBusRouteScreen user = {user} setUser = {setUser} busRoutes = {busRoutes} currentDate = {currentDate} getDateTime = {getDateTime} displayTime = {displayTime} updateFormData = {updateFormData} />
         </Route>
 
         <Route exact path = "/">

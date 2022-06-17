@@ -46,12 +46,13 @@ function BeginLoggingBusRouteForm({ user, busRoutes, currentDate, setDailyRouteI
             })
             .then((response) => {
                 if (response.ok) {
-                    response.json().then((createdDailyRoute)=>setDailyRouteInfo(createdDailyRoute))
+                    response.json().then((createdDailyRoute)=>{
+                        setDailyRouteInfo(createdDailyRoute)
+                    })
                 }
             })
-        return;
         }
-   
+  
     if(logRouteFormData.busId) {
         displayedBusRoutes = busRoutes.filter((busRoute) => busRoute.bus_id === logRouteFormData.busId);
     }
