@@ -24,10 +24,16 @@ function App() {
   function displayTime(rubyTime) {
     let hours = rubyTime.substring(11, 13);
     let minutes = rubyTime.substring(14,16);
+
     const ampm = hours >= 12 ? 'pm' : 'am';
-    hours = hours % 12;
-    hours = hours ? hours : 12; // the hour '0' should be '12'
-    minutes = minutes < 10 ? '0'+minutes : minutes;
+    
+    if(hours > 12) {
+      hours = hours - 12
+    }
+    else if(hours == 0) {
+      hours = 12;
+    }
+
     const strTime = hours + ':' + minutes + ' ' + ampm;
     return strTime;
   }
