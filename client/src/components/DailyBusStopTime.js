@@ -1,7 +1,7 @@
 import '../App.css';
 import React, { useState, useEffect } from 'react';
 
-function BusStopForLog({ dailyRouteId, busStop, completedStops, setCompletedStops, getDateTime, displayTime  }) {
+function DailyBusStopTime({ dailyRouteId, busStop, completedStops, setCompletedStops, getDateTime, displayTime, mode  }) {
 
     function handleStopCompleted(event) {
         const updatedCompletedStops = {
@@ -27,11 +27,15 @@ function BusStopForLog({ dailyRouteId, busStop, completedStops, setCompletedStop
         <div>
             {busStop.location_description}
             <br />
-            {busStop.pick_up_or_drop_off_time ? displayTime(busStop.pick_up_or_drop_off_time) : <button value = {busStop.id} onClick = {handleStopCompleted}>Complete</button>}
+            {busStop.pick_up_or_drop_off_time ? 
+                <strong>{displayTime(busStop.pick_up_or_drop_off_time)}</strong> : 
+                mode === "driver" ? 
+                    <button value = {busStop.id} onClick = {handleStopCompleted}>Complete</button> :
+                    <strong>Has not arrived</strong>}
             <br />
             <br />
         </div>
     );
 }
 
-export default BusStopForLog;
+export default DailyBusStopTime;

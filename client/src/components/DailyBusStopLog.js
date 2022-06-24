@@ -1,8 +1,8 @@
 import '../App.css';
 import React, { useState, useEffect } from 'react';
-import BusStopForLog from './BusStopForLog';
+import DailyBusStopTime from './DailyBusStopTime';
 
-function DailyBusStopLog({ dailyRouteId, busStops, getDateTime, displayTime }) {
+function DailyBusStopLog({ dailyRouteId, busStops, getDateTime, displayTime, mode }) {
 
     const [completedStops, setCompletedStops] = useState([]);
 
@@ -27,7 +27,7 @@ function DailyBusStopLog({ dailyRouteId, busStops, getDateTime, displayTime }) {
         return (
             <div>
                 {
-                busStopsWithCompleted.map((busStop)=><BusStopForLog key = {busStop.id} dailyRouteId = {dailyRouteId} busStop = {busStop} getDateTime = {getDateTime} displayTime = {displayTime} completedStops = {completedStops} setCompletedStops = {setCompletedStops} />)
+                busStopsWithCompleted.map((busStop)=><DailyBusStopTime key = {busStop.id} dailyRouteId = {dailyRouteId} busStop = {busStop} getDateTime = {getDateTime} displayTime = {displayTime} completedStops = {completedStops} setCompletedStops = {setCompletedStops} mode = {mode} />)
                 }
             </div>
         );

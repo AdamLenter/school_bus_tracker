@@ -19,7 +19,7 @@ function LoggedInUserWelcomeScreen({ user, setUser }) {
             </p>
                 
                 {user['adult_contact']['parent'] ? 
-                    <p><Link to="/trackABus">Track a bus</Link></p> : null}
+                    <p><Link to="/trackStudentBus">Track a bus</Link></p> : null}
 
 
                 {user['adult_contact']['driver'] ? 

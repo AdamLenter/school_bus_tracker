@@ -12,6 +12,11 @@ class DailyRoutesController < ApplicationController
         render json: daily_route, status: :ok
     end
 
+    def where 
+        daily_route = DailyRoute.find_by(daily_route_params)
+        render json: daily_route, status: :ok
+    end
+
     private
 
     def daily_route_params

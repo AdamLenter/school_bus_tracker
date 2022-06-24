@@ -8,6 +8,7 @@ import MyProfileScreen from './components/MyProfileScreen';
 import AddStudentForm from './components/AddStudentForm';
 import AddBusForm from './components/AddBusForm';
 import LogBusRouteScreen from './components/LogBusRouteScreen';
+import TrackStudentBus from './components/TrackStudentBus';
 
 function App() {
 
@@ -63,7 +64,7 @@ function App() {
     
     return updatedFormData;
   }
-console.log(students);
+
   useEffect(()=> {
     fetch("/me")
     .then((r)=>r.json())
@@ -123,6 +124,10 @@ console.log(students);
 
         <Route exact path = "/LogBusRoute">
           <LogBusRouteScreen user = {user} setUser = {setUser} busRoutes = {busRoutes} currentDate = {currentDate} getDateTime = {getDateTime} displayTime = {displayTime} updateFormData = {updateFormData} />
+        </Route>
+
+        <Route exact path = "/TrackStudentBus">
+          <TrackStudentBus students = {students} busRoutes = {busRoutes} currentDate = {currentDate} updateFormData = {updateFormData} busStops = {busStops} getDateTime = {getDateTime} displayTime = {displayTime} />
         </Route>
 
         <Route exact path = "/">

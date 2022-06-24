@@ -17,6 +17,7 @@ Rails.application.routes.draw do
   get '/bus_routes', to: 'bus_routes#index'
   get '/bus_stops', to: 'bus_stops#index'
   get '/daily_route_stop_times_by_parameters/:daily_route_id', to: 'daily_route_stop_times#where'
+  get '/daily_route/:bus_route_id/:date/:to_or_from_school', to: 'daily_routes#where'
   get '/parent_students/:adult_contact_id', to: 'students#where'
 
   post '/users', to: 'special#create'
