@@ -20,7 +20,7 @@ class DailyRoutesController < ApplicationController
     private
 
     def daily_route_params
-        params.permit(:date, :bus_route_id, :adult_contact_id, :to_or_from_school)
+        params.permit(:date, :bus_route_id, :adult_contact_id, :to_or_from_school, :route_start_time)
     end
 
     def render_unprocessable_entity_response(invalid)

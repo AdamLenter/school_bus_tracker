@@ -47,7 +47,9 @@ function TrackStudentBus({ students, busRoutes, currentDate, updateFormData, bus
         fetch(fetchUrl)
             .then((r)=>r.json())
             .then((dailyBusRouteInfo)=>{
-                setDailyBusRoute(dailyBusRouteInfo);
+                if(dailyBusRouteInfo) {
+                    setDailyBusRoute(dailyBusRouteInfo);
+                }
             });
 
         setSearchedBusInfo(updatedSearchedBusInfo);

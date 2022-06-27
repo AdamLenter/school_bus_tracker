@@ -1,7 +1,7 @@
 import '../App.css';
 import React, { useState } from 'react';
 
-function BeginLoggingBusRouteForm({ user, busRoutes, currentDate, setDailyRouteInfo, updateFormData }) {
+function BeginLoggingBusRouteForm({ user, busRoutes, currentDate, getDateTime, setDailyRouteInfo, updateFormData }) {
 
     const [logRouteFormData, setLogRouteFormData] = useState({
         busId: null, 
@@ -36,9 +36,10 @@ function BeginLoggingBusRouteForm({ user, busRoutes, currentDate, setDailyRouteI
             bus_route_id: logRouteFormData.busRouteId, 
             adult_contact_id: user.adult_contact.id,
             to_or_from_school: logRouteFormData.toOrFromSchool, 
-            date: currentDate
+            date: currentDate, 
+            route_start_time: getDateTime(new Date())
         }
-
+        
         fetch("/daily_route", {
             method: "post", 
             headers: {"Content-type": "application/json"}, 

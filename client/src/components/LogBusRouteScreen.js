@@ -38,7 +38,7 @@ function LogBusRouteScreen({ user, busRoutes, currentDate, getDateTime, displayT
             <div>
                 <h1>Log Bus Route</h1>
                 {!dailyRouteInfo.id ? 
-                    <BeginLoggingBusRouteForm user = {user} busRoutes = {busRoutes} currentDate = {currentDate} setDailyRouteInfo = {setDailyRouteInfo} updateFormData = {updateFormData} /> : 
+                    <BeginLoggingBusRouteForm user = {user} busRoutes = {busRoutes} currentDate = {currentDate} getDateTime = {getDateTime} setDailyRouteInfo = {setDailyRouteInfo} updateFormData = {updateFormData} /> : 
                     displayedBusStopList.length > 0 ? <DailyBusStopLog dailyRouteId = {dailyRouteInfo.id} busStops = {displayedBusStopList} getDateTime = {getDateTime} displayTime = {displayTime} mode = "driver" /> : null
                 }
                 

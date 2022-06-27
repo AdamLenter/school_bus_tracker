@@ -7,7 +7,6 @@ function ChildProfileInfo({ student, busStops }) {
     let busStopInfo
     if(student.bus_stop_id && busStops.length > 0) {
         busStopInfo = busStops.find((busStop)=>busStop.id === student.bus_stop_id);
-        console.log(busStopInfo)
     }
 
     return (
