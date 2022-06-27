@@ -43,7 +43,7 @@ function TrackStudentBus({ students, busRoutes, currentDate, updateFormData, bus
         }
         
         const fetchUrl = `/daily_route/${updatedSearchedBusInfo.busRoute.id}/${currentDate}/${trackBusFormData.toOrFromSchool}`;
-
+console.log(fetchUrl);
         fetch(fetchUrl)
             .then((r)=>r.json())
             .then((dailyBusRouteInfo)=>{
@@ -54,7 +54,7 @@ function TrackStudentBus({ students, busRoutes, currentDate, updateFormData, bus
 
         setSearchedBusInfo(updatedSearchedBusInfo);
     }
-
+console.log(dailyBusRoute);
     if(students.length > 0 && !trackBusFormData.studentId) {
         let updatedTrackBusFormData = {...trackBusFormData};
         updatedTrackBusFormData.studentId = students[0].id;
