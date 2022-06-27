@@ -30,7 +30,7 @@ function App() {
     if(hours > 12) {
       hours = hours - 12
     }
-    else if(hours == 0) {
+    else if(hours === 0) {
       hours = 12;
     }
 

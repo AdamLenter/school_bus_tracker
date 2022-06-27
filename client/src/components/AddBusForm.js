@@ -53,6 +53,7 @@ function AddBusForm({ user, setUser, buses, updateFormData }) {
                     updatedAdultContact.buses = updatedBuses;
                     updatedUser.adult_contact = updatedAdultContact;
                     setUser(updatedUser);
+                    setBusAddSuccessful(true);
                 })
             } else {
               response.json().then((errorData) => setAddBusErrors(errorData.errors));
@@ -61,12 +62,12 @@ function AddBusForm({ user, setUser, buses, updateFormData }) {
     }
     
     function handleAddAdditionalBus() {
-        console("Hey");
+        setBusAddSuccessful(false);
     }
 
     return (
         <div>
-            {/* {addBusErrors.length > 0 ? <DisplayErrors errors = {addBusErrors} /> : null} */}
+            {addBusErrors.length > 0 ? <DisplayErrors errors = {addBusErrors} /> : null}
             <h1>Add a Bus</h1>
     
             {!busAddSuccessful ? (
@@ -88,7 +89,6 @@ function AddBusForm({ user, setUser, buses, updateFormData }) {
                 <div>
                     <h1>Add a Student</h1>
                     <p><strong>New student successfully added.</strong></p>
-                    <p>Click <Link to = "/MyProfile">here</Link> to return to your profile</p>
                     <p>Click <Link to = "/AddBusForm" onClick = {handleAddAdditionalBus}>here</Link> to add another bus</p>
                 </div>
                 )}

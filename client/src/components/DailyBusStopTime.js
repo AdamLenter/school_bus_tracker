@@ -1,5 +1,5 @@
 import '../App.css';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 
 function DailyBusStopTime({ dailyRouteId, busStop, completedStops, setCompletedStops, getDateTime, displayTime, mode  }) {
 
