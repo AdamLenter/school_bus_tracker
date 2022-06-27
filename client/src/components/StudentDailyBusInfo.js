@@ -17,8 +17,9 @@ console.log(dailyBusRoute);
                 <br />
                 <strong>Bus Number: </strong>{busRoute.bus.number}
                 <br />
-                <br />
-                <h2>Bus Status:</h2>
+            </p>
+            <h2>Bus Status:</h2>
+            <p>
                 <strong>Began Route: </strong>{dailyBusRoute.route_start_time ? displayTime(dailyBusRoute.route_start_time) : "N/A"}
             </p>
             <br />

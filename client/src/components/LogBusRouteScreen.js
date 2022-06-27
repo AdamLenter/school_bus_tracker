@@ -1,16 +1,21 @@
 import '../App.css';
 import React, { useState } from 'react';
 import BeginLoggingBusRouteForm from './BeginLoggingBusRouteForm';
-import DailyBusStopLog from './DailyBusStopLog';
+import LogBusRouteDetails from './LogBusRouteDetails';
 
 function LogBusRouteScreen({ user, busRoutes, currentDate, getDateTime, displayTime, updateFormData }) {
     
     const [dailyRouteInfo, setDailyRouteInfo] = useState({});
+    let busRouteDetails = {};
     let busStopList = [];
     let displayedBusStopList = [];
 
     if(dailyRouteInfo.bus_route_id) {
-        busStopList = busRoutes.find((busRoute)=>busRoute.id === dailyRouteInfo.bus_route_id).bus_stops;
+        busRouteDetails = busRoutes.find((busRoute)=>busRoute.id === dailyRouteInfo.bus_route_id);
+    }
+
+    if(Object.keys(busRouteDetails).length > 0) {
+        busStopList = busRouteDetails.bus_stops;
     }
 
     if(busStopList.length > 0) {
@@ -39,7 +44,9 @@ function LogBusRouteScreen({ user, busRoutes, currentDate, getDateTime, displayT
                 <h1>Log Bus Route</h1>
                 {!dailyRouteInfo.id ? 
                     <BeginLoggingBusRouteForm user = {user} busRoutes = {busRoutes} currentDate = {currentDate} getDateTime = {getDateTime} setDailyRouteInfo = {setDailyRouteInfo} updateFormData = {updateFormData} /> : 
-                    displayedBusStopList.length > 0 ? <DailyBusStopLog dailyRouteId = {dailyRouteInfo.id} busStops = {displayedBusStopList} getDateTime = {getDateTime} displayTime = {displayTime} mode = "driver" /> : null
+                    displayedBusStopList.length > 0 ?  
+                        <LogBusRouteDetails busRouteDetails = {busRouteDetails} dailyRouteInfo = {dailyRouteInfo} busStops = {displayedBusStopList} getDateTime = {getDateTime} displayTime = {displayTime} />: 
+                        null
                 }
                 
             </div>
