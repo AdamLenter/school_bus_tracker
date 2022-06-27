@@ -4,12 +4,27 @@ import { Link } from 'react-router-dom';
 
 function ProfileBusSection({ buses }) {
     
+    let displayedBuses = [];
+
+    if(buses.length > 0) {
+        console.log("Here");
+        displayedBuses = buses.sort((a, b)=> {
+        if(a.number < b.number){
+          return -1;
+          }
+        else {
+          return 1;
+        }
+      })
+    }
+console.log(buses);
+      
     return (
         <div>
             <br />
             <h2>My Buses</h2>
-            {buses.length > 0 ? 
-                buses.map((bus)=>(
+            {displayedBuses.length > 0 ? 
+                displayedBuses.map((bus)=>(
                     <div key = {bus.id} >
                         <strong>Bus #: </strong>
                         {bus.number}

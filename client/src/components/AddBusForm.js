@@ -63,8 +63,9 @@ function AddBusForm({ user, setUser, buses, updateFormData }) {
     
     function handleAddAdditionalBus() {
         setBusAddSuccessful(false);
+        setBusId(null);
     }
-
+    
     return (
         <div>
             {addBusErrors.length > 0 ? <DisplayErrors errors = {addBusErrors} /> : null}
@@ -87,8 +88,7 @@ function AddBusForm({ user, setUser, buses, updateFormData }) {
                 </form>
                 ) : (
                 <div>
-                    <h1>Add a Student</h1>
-                    <p><strong>New student successfully added.</strong></p>
+                   <p><strong>New bus successfully added.</strong></p>
                     <p>Click <Link to = "/AddBusForm" onClick = {handleAddAdditionalBus}>here</Link> to add another bus</p>
                 </div>
                 )}
