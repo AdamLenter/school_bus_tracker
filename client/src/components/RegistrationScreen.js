@@ -19,7 +19,17 @@ function RegistrationScreen({ updateFormData }) {
     const [registrationErrors, setRegistrationErrors] = useState([]);
 
     function updateRegistrationFormData(event) {
-        const updatedFormData = updateFormData(registrationFormData, event);
+        let updatedFormData = {};
+        if(event.target.name === "parent" || event.target.name === "driver")
+            {
+            updatedFormData = {...registrationFormData};
+            updatedFormData[event.target.name] = event.target.value;
+            }
+        else
+            {
+            updatedFormData = updateFormData(registrationFormData, event);
+            }
+        
         setRegistrationFormData(updatedFormData);
     }
 
