@@ -1,6 +1,7 @@
 class DailyRoutesController < ApplicationController
-    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+    before_action :authorize
 
+    rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
     def create
         daily_route = DailyRoute.find_by(daily_route_params)
@@ -24,5 +25,9 @@ class DailyRoutesController < ApplicationController
 
     def render_unprocessable_entity_response(invalid)
         render json: { errors: invalid.record.errors.full_messages }, status: :unprocessable_entity
+    end
+
+    def authorize
+        return render json: { error: "Not authorized" }, status: :unauthorized unless session.include? :user_id
     end
 end
