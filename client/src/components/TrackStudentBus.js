@@ -1,6 +1,7 @@
 import '../App.css';
 import React, { useState } from 'react';
 import StudentDailyBusInfo from './StudentDailyBusInfo';
+import { Link } from 'react-router-dom';
 
 function TrackStudentBus({ students, busRoutes, currentDate, updateFormData, busStops, getDateTime, displayTime }) {
 
@@ -82,6 +83,9 @@ function TrackStudentBus({ students, busRoutes, currentDate, updateFormData, bus
                 </form>
                 <br />
                 {searchedBusInfo.student.first_name ? <StudentDailyBusInfo student = {searchedBusInfo.student} busRoute = {searchedBusInfo.busRoute} dailyBusRoute = {dailyBusRoute} busStops = {busStops} getDateTime = {getDateTime} displayTime = {displayTime} /> : null}
+                <br />
+                <br />
+                <p>Click <Link to = "/">here</Link> to return to the home screen</p>
             </div>
         );
     }

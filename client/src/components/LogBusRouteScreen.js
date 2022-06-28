@@ -2,6 +2,7 @@ import '../App.css';
 import React, { useState } from 'react';
 import BeginLoggingBusRouteForm from './BeginLoggingBusRouteForm';
 import LogBusRouteDetails from './LogBusRouteDetails';
+import { Link } from 'react-router-dom';
 
 function LogBusRouteScreen({ user, busRoutes, currentDate, getDateTime, displayTime, updateFormData }) {
     
@@ -49,6 +50,7 @@ function LogBusRouteScreen({ user, busRoutes, currentDate, getDateTime, displayT
                         null
                 }
                 
+                <p>Click <Link to = "/">here</Link> to return to the home screen</p>
             </div>
         );
     }
