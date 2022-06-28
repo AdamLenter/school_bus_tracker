@@ -10,7 +10,7 @@ function LogBusRouteScreen({ user, busRoutes, currentDate, getDateTime, displayT
     let busRouteDetails = {};
     let busStopList = [];
     let displayedBusStopList = [];
-
+    
     if(dailyRouteInfo.bus_route_id) {
         busRouteDetails = busRoutes.find((busRoute)=>busRoute.id === dailyRouteInfo.bus_route_id);
     }

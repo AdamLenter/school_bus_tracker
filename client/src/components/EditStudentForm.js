@@ -1,9 +1,10 @@
 import '../App.css';
 import React from 'react';
-import { Router, useParams } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 function EditStudentForm() {
-    const params = useParams();
+    const {studentId} = useParams();
+    console.log(studentId);
     return (
         <div>
             <p>Hi</p>

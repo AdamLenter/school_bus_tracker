@@ -1,7 +1,7 @@
 import '../App.css';
 import React, { useState } from 'react';
 import DisplayErrors from './DisplayErrors';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom';
 
 function RegistrationScreen({ updateFormData }) {
 

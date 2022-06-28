@@ -1,6 +1,6 @@
 import './App.css';
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import HomeScreen from './components/HomeScreen';
 import RegistrationScreen from './components/RegistrationScreen';
 import LoggedInUserWelcomeScreen from './components/LoggedInUserWelcomeScreen';
@@ -113,41 +113,25 @@ function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        <Route exact path = "/register">
-          <RegistrationScreen updateFormData={updateFormData} />
-        </Route>
-        
-        <Route exact path = "/MyProfile">
-          <MyProfileScreen user = {user} students = {students} setStudents = {setStudents} busStops = {busStops} />
-        </Route>
-        
-        <Route exact path = "/AddStudentForm">
-          <AddStudentForm user = {user} students = {students} setStudents = {setStudents} schools = {schools} busRoutes = {busRoutes} busStops = {busStops} updateFormData = {updateFormData} />
-        </Route>
+        <Routes>
+          <Route exact path = "/register" element={<RegistrationScreen updateFormData={updateFormData} />} />
+          
+          <Route exact path = "/MyProfile" element = {<MyProfileScreen user = {user} students = {students} setStudents = {setStudents} busStops = {busStops} />} />
+          
+          <Route exact path = "/AddStudentForm" element = {<AddStudentForm user = {user} students = {students} setStudents = {setStudents} schools = {schools} busRoutes = {busRoutes} busStops = {busStops} updateFormData = {updateFormData} />} />
 
-        <Route exact path = "/EditStudentForm/:studentId">
-          <EditStudentForm />
-        </Route>
+          <Route exact path = "/EditStudentForm/:studentId" element={<EditStudentForm />}/>
 
-        <Route exact path = "/AddBusForm">
-          <AddBusForm user = {user} setUser = {setUser} buses = {buses} updateFormData = {updateFormData} />
-        </Route>
+          <Route exact path = "/AddBusForm" element={<AddBusForm user = {user} setUser = {setUser} buses = {buses} updateFormData = {updateFormData} />} />
+            
+          <Route exact path = "/LogBusRoute" element={ <LogBusRouteScreen user = {user} setUser = {setUser} busRoutes = {busRoutes} currentDate = {currentDate} getDateTime = {getDateTime} displayTime = {displayTime} updateFormData = {updateFormData} />} />
 
-        <Route exact path = "/LogBusRoute">
-          <LogBusRouteScreen user = {user} setUser = {setUser} busRoutes = {busRoutes} currentDate = {currentDate} getDateTime = {getDateTime} displayTime = {displayTime} updateFormData = {updateFormData} />
-        </Route>
-
-        <Route exact path = "/TrackStudentBus">
-          <TrackStudentBus students = {students} busRoutes = {busRoutes} currentDate = {currentDate} updateFormData = {updateFormData} busStops = {busStops} getDateTime = {getDateTime} displayTime = {displayTime} />
-        </Route>
-
-        <Route exact path = "/">
-          {!user['adult_contact'] ? 
-            <HomeScreen setUser = {setUser} updateFormData={updateFormData} /> : 
-            <LoggedInUserWelcomeScreen user = {user} setUser = {setUser} />
-          }
-        </Route>
-        
+          <Route exact path = "/TrackStudentBus" element={<TrackStudentBus students = {students} busRoutes = {busRoutes} currentDate = {currentDate} updateFormData = {updateFormData} busStops = {busStops} getDateTime = {getDateTime} displayTime = {displayTime} />} />
+          
+          {!user['adult_contact'] ?
+            <Route exact path = "/" element={<HomeScreen setUser = {setUser} updateFormData={updateFormData} />} /> : 
+            <Route exact path = "/" element={<LoggedInUserWelcomeScreen user = {user} setUser = {setUser} />} />}
+        </Routes>
       </BrowserRouter>
     </div>
   )

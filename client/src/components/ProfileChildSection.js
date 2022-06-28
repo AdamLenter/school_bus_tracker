@@ -1,7 +1,7 @@
 import '../App.css';
 import React from 'react';
 import ChildProfileInfo from './ChildProfileInfo';
-import { Link, Router } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 function ProfileChildSection({ students, setStudents, busStops }) {
     

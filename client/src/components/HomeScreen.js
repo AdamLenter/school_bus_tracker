@@ -1,7 +1,7 @@
 import logo from '../bus_image.jpeg';
 import '../App.css';
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom/cjs/react-router-dom.min';
+import { Link } from 'react-router-dom';
 import DisplayErrors from './DisplayErrors';
 
 
