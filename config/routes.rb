@@ -29,5 +29,6 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
 
   delete "/logout", to: "sessions#destroy"
+  delete "/students/:student_id", to: "students#destroy"
 
 end

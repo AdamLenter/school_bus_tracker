@@ -7,7 +7,7 @@ function ProfileBusSection({ buses }) {
     let displayedBuses = [];
 
     if(buses.length > 0) {
-        console.log("Here");
+        
         displayedBuses = buses.sort((a, b)=> {
         if(a.number < b.number){
           return -1;
@@ -17,7 +17,6 @@ function ProfileBusSection({ buses }) {
         }
       })
     }
-console.log(buses);
       
     return (
         <div>

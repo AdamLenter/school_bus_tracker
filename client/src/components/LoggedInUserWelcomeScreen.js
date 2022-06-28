@@ -8,7 +8,6 @@ function LoggedInUserWelcomeScreen({ user, setUser }) {
         fetch("/logout", {
             method: "DELETE"})
             .then (()=>setUser({}))
-            .then (()=>console.log(user))
         }
 
     return (

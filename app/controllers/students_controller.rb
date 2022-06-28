@@ -13,6 +13,12 @@ class StudentsController < ApplicationController
         render json: students, status: :ok
     end
 
+    def destroy
+        student = Student.find(params[:id])
+        student.destroy
+        head :no_content
+    end
+
     private 
 
     def student_params

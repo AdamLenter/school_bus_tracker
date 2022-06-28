@@ -3,7 +3,7 @@ import React from 'react';
 import DailyBusStopLog from './DailyBusStopLog';
 
 function LogBusRouteDetails({ busRouteDetails, dailyRouteInfo, busStops, getDateTime, displayTime }) {
-console.log(dailyRouteInfo);
+    
     if(Object.keys(busRouteDetails).length > 0) {
         return (
             <div>

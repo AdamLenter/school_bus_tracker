@@ -9,6 +9,7 @@ import AddStudentForm from './components/AddStudentForm';
 import AddBusForm from './components/AddBusForm';
 import LogBusRouteScreen from './components/LogBusRouteScreen';
 import TrackStudentBus from './components/TrackStudentBus';
+import EditStudentForm from './components/EditStudentForm';
 
 function App() {
 
@@ -117,11 +118,15 @@ function App() {
         </Route>
         
         <Route exact path = "/MyProfile">
-          <MyProfileScreen user = {user} students = {students} busStops = {busStops} />
+          <MyProfileScreen user = {user} students = {students} setStudents = {setStudents} busStops = {busStops} />
         </Route>
         
         <Route exact path = "/AddStudentForm">
           <AddStudentForm user = {user} students = {students} setStudents = {setStudents} schools = {schools} busRoutes = {busRoutes} busStops = {busStops} updateFormData = {updateFormData} />
+        </Route>
+
+        <Route exact path = "/EditStudentForm/:studentId">
+          <EditStudentForm />
         </Route>
 
         <Route exact path = "/AddBusForm">
