@@ -5,7 +5,7 @@ import DailyRouteMessage from './DailyRouteMessage';
 
 function LogBusRouteDetails({ busRouteDetails, dailyRouteInfo, setDailyRouteInfo, busStops, getDateTime, displayTime }) {
     const [dailyRouteMessage, setDailyRouteMessage] = useState("");
-    console.log(dailyRouteInfo.id);
+
     function handleEditMessage(event){
         setDailyRouteMessage(event.target.value);
     }
@@ -31,6 +31,7 @@ function LogBusRouteDetails({ busRouteDetails, dailyRouteInfo, setDailyRouteInfo
                         updatedDailyRouteInfo.daily_route_messages = [...updatedDailyRouteInfo.daily_route_messages, newMessage];
     
                         setDailyRouteInfo(updatedDailyRouteInfo);
+                        setDailyRouteMessage("");
                     })
                 }
             })
@@ -54,12 +55,13 @@ function LogBusRouteDetails({ busRouteDetails, dailyRouteInfo, setDailyRouteInfo
                 <br />
 
                 <h2>Messages:</h2>
-                {dailyRouteInfo.daily_route_messages.length > 0 ? dailyRouteInfo.daily_route_messages.map((dailyRouteMessage)=><DailyRouteMessage key = {dailyRouteMessage.id} message = {dailyRouteMessage.message} />) : "(no messages to display)"}
+                {dailyRouteInfo.daily_route_messages.length > 0 ? dailyRouteInfo.daily_route_messages.map((dailyRouteMessage)=><DailyRouteMessage key = {dailyRouteMessage.id} messageInfo = {dailyRouteMessage} displayTime = {displayTime} />) : "(no messages to display)"}
 
                 <form onSubmit = {handleSubmitMessageForm}>
                     <br />
                     <label>Add a message: </label>
                     <input name = "dailyRouteMessage" value = {dailyRouteMessage} onChange = {handleEditMessage} />
+                    <br />
                     <br />
                     <button>Submit</button>
                 </form>

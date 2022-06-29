@@ -1,12 +1,12 @@
 import '../App.css';
 import React from 'react';
 
-function DailyRouteMessage({ message }) {
-
-
+function DailyRouteMessage({ messageInfo, displayTime }) {
+    
     return (
         <div>
-            {message}
+            <strong>{displayTime(messageInfo.updated_at)}</strong>: {messageInfo.message}
+            <br />
             <br />
         </div>
     );
