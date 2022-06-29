@@ -1,11 +1,11 @@
 import '../App.css';
 import React from 'react';
 import DailyBusStopLog from './DailyBusStopLog';
+import DailyRouteMessage from './DailyRouteMessage';
 
 function StudentDailyBusInfo({ student, busRoute, dailyBusRoute, busStops, getDateTime, displayTime }) {
     
     const busStopsToDisplay = busStops.filter((busStop)=>busStop.bus_route_id === busRoute.id);
-console.log(dailyBusRoute);
 
     return (
         <div>
@@ -28,7 +28,9 @@ console.log(dailyBusRoute);
                     <strong>Stop Times:</strong>
                     <DailyBusStopLog dailyRouteId = {dailyBusRoute.id} busStops = {busStopsToDisplay} getDateTime = {getDateTime} displayTime = {displayTime} mode = "student" />
                 </div> : null}
-            
+
+            <h2>Driver Messages</h2>
+            {dailyBusRoute.daily_route_messages && dailyBusRoute.daily_route_messages.length > 0 ? dailyBusRoute.daily_route_messages.map((dailyRouteMessage)=><DailyRouteMessage key = {dailyRouteMessage.id} messageInfo = {dailyRouteMessage} displayTime = {displayTime} />) : "(no messages to display)"}
         </div>
     );
 }
