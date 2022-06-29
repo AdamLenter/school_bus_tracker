@@ -25,6 +25,8 @@ Rails.application.routes.draw do
   post '/driver_buses', to: 'driver_buses#create'
   post '/daily_route', to: 'daily_routes#create'
   post '/daily_route_stop_times', to: 'daily_route_stop_times#create'
+  post '/daily_route_messages', to: 'daily_route_messages#create'
+  
 
   post "/login", to: "sessions#create"
 

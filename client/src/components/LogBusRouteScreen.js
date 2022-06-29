@@ -46,7 +46,7 @@ function LogBusRouteScreen({ user, busRoutes, currentDate, getDateTime, displayT
                 {!dailyRouteInfo.id ? 
                     <BeginLoggingBusRouteForm user = {user} busRoutes = {busRoutes} currentDate = {currentDate} getDateTime = {getDateTime} setDailyRouteInfo = {setDailyRouteInfo} updateFormData = {updateFormData} /> : 
                     displayedBusStopList.length > 0 ?  
-                        <LogBusRouteDetails busRouteDetails = {busRouteDetails} dailyRouteInfo = {dailyRouteInfo} busStops = {displayedBusStopList} getDateTime = {getDateTime} displayTime = {displayTime} />: 
+                        <LogBusRouteDetails busRouteDetails = {busRouteDetails} dailyRouteInfo = {dailyRouteInfo} setDailyRouteInfo = {setDailyRouteInfo} busStops = {displayedBusStopList} getDateTime = {getDateTime} displayTime = {displayTime} />: 
                         null
                 }
                 

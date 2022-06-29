@@ -1,11 +1,11 @@
 import '../App.css';
 import React, { useState } from 'react';
 import DailyBusStopLog from './DailyBusStopLog';
+import DailyRouteMessage from './DailyRouteMessage';
 
-function LogBusRouteDetails({ busRouteDetails, dailyRouteInfo, busStops, getDateTime, displayTime }) {
-    
+function LogBusRouteDetails({ busRouteDetails, dailyRouteInfo, setDailyRouteInfo, busStops, getDateTime, displayTime }) {
     const [dailyRouteMessage, setDailyRouteMessage] = useState("");
-    
+    console.log(dailyRouteInfo.id);
     function handleEditMessage(event){
         setDailyRouteMessage(event.target.value);
     }
@@ -14,25 +14,25 @@ function LogBusRouteDetails({ busRouteDetails, dailyRouteInfo, busStops, getDate
         event.preventDefault();
         console.log(dailyRouteMessage);
 
+        const dailyRouteMessageForDb = {
+            message: dailyRouteMessage, 
+            daily_route_id: dailyRouteInfo.id
+        }
         if(dailyRouteMessage !== "") {
             fetch("/daily_route_messages", {
                 method: "POST", 
                 headers: {"Content-Type": "application/json"}, 
-                body: JSON.stringify(dailyRouteMessage)
+                body: JSON.stringify(dailyRouteMessageForDb)
             })
             .then((response) => {
-                console.log(response);
-                // if (response.ok) {
-                //     response.json().then((createdStudent)=>{
-                //         let updatedStudents = [...students, createdStudent];
+                if (response.ok) {
+                    response.json().then((newMessage)=>{
+                        let updatedDailyRouteInfo = {...dailyRouteInfo};
+                        updatedDailyRouteInfo.daily_route_messages = [...updatedDailyRouteInfo.daily_route_messages, newMessage];
     
-                //         setStudents(updatedStudents);
-                //         setStudentAddSuccessful(true);
-                //         setAddStudentErrors(false);
-                //     })
-                // } else {
-                //   response.json().then((errorData) => setAddStudentErrors(errorData.errors));
-                // }
+                        setDailyRouteInfo(updatedDailyRouteInfo);
+                    })
+                }
             })
         }
     }
@@ -50,6 +50,11 @@ function LogBusRouteDetails({ busRouteDetails, dailyRouteInfo, busStops, getDate
                 <br />
                 <br />
                 <DailyBusStopLog dailyRouteId = {dailyRouteInfo.id} busStops = {busStops} getDateTime = {getDateTime} displayTime = {displayTime} mode = "driver" />
+                <br />
+                <br />
+
+                <h2>Messages:</h2>
+                {dailyRouteInfo.daily_route_messages.length > 0 ? dailyRouteInfo.daily_route_messages.map((dailyRouteMessage)=><DailyRouteMessage key = {dailyRouteMessage.id} message = {dailyRouteMessage.message} />) : "(no messages to display)"}
 
                 <form onSubmit = {handleSubmitMessageForm}>
                     <br />
