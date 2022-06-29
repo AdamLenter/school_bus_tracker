@@ -1,5 +1,5 @@
 class StudentsController < ApplicationController
-    before_action :authorize
+    # before_action :authorize
 
     rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
 
@@ -13,6 +13,13 @@ class StudentsController < ApplicationController
     def where
         students = Student.where(adult_contact_id: params[:adult_contact_id])
         render json: students, status: :ok
+    end
+
+    def update
+        student = Student.find_by(id: params[:id])
+        student.update(student_params)
+        student
+        render json: student, status: :ok
     end
 
     def destroy

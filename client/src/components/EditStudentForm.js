@@ -7,6 +7,8 @@ import AddEditStudentForm from './AddEditStudentForm';
 function EditStudentForm({ students, setStudents, schools, busRoutes, busStops, updateFormData }) {
     
     const [studentFormData, setStudentFormData] = useState({});
+    const [successfulEdit, setSuccessfulEdit] = useState(false);
+
     const params = useParams();
     
     const studentId = Number(params.studentId);
@@ -33,18 +35,60 @@ function EditStudentForm({ students, setStudents, schools, busRoutes, busStops, 
 
     function handleSubmitEditStudentForm(event) {
         event.preventDefault();
-        console.log("HEllo");
-    }
-    return (
-        <div>
-            <h1>Edit Student Information</h1>
+        
+        const updatedStudent = {
+            id: studentId, 
+            first_name: studentFormData.firstName, 
+            last_name: studentFormData.lastName, 
+            bus_stop_id: studentFormData.busStopId, 
+            adult_contact_id: studentInfo.adult_contact_id
+        }
 
-            <form onSubmit = {handleSubmitEditStudentForm}>
-                <AddEditStudentForm defaultStudentFormData = {blankFormData} studentFormData = {studentFormData} setStudentFormData = {setStudentFormData} schools = {schools} busRoutes = {busRoutes} busStops = {busStops} updateFormData = {updateFormData} />
-                <button>Submit</button>
-            </form>
+        fetch(`/students/${studentId}`, {
+        method: "PATCH",
+        headers: {
+            "Content-Type": "application/json"
+            },
+        body: JSON.stringify(updatedStudent)
+        })
+        .then(()=> {
+            setStudentFormData(blankFormData);
+            setSuccessfulEdit(true);
+        })
+        
+    const updatedStudents = students.map((student)=> {
+        if(student.id === studentId) {
+            return updatedStudent;
+            }
+        else {
+            return student;
+            }
+    })
+
+    setStudents(updatedStudents);
+    }
+
+    if(!successfulEdit) {
+        return (
+            <div>
+                <h1>Edit Student Information</h1>
+
+                <form onSubmit = {handleSubmitEditStudentForm}>
+                    <AddEditStudentForm defaultStudentFormData = {blankFormData} studentFormData = {studentFormData} setStudentFormData = {setStudentFormData} schools = {schools} busRoutes = {busRoutes} busStops = {busStops} updateFormData = {updateFormData} />
+                    <button>Submit</button>
+                </form>
+            </div>
+        );
+    }
+    else {
+        return (
+            <div>
+                <h1>Edit Student Information</h1>
+                <p><strong>Student successfully edited.</strong></p>
+                <p>Click <Link to = "/MyProfile">here</Link> to return to your profile</p>
         </div>
-    );
+        )
+    }
 
 }
 
