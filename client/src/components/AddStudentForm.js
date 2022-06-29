@@ -2,6 +2,7 @@ import '../App.css';
 import React, { useState } from 'react';
 import DisplayErrors from './DisplayErrors';
 import { Link } from 'react-router-dom';
+import AddEditStudentForm from './AddEditStudentForm';
 
 function AddStudentForm({ user, students, setStudents, schools, busRoutes, busStops, updateFormData }) {
     const[addStudentErrors, setAddStudentErrors] = useState([]);
@@ -47,46 +48,39 @@ function AddStudentForm({ user, students, setStudents, schools, busRoutes, busSt
         })
     }
 
-    function handleAddStudentFormChange(event) {
-        const updatedAddStudentFormData = updateFormData(addStudentFormData, event);
+    let schoolBusRoutes = [];
 
-        if(event.target.name === "schoolId") {
-            updatedAddStudentFormData.busRouteId = updateDefaultBusRouteId(Number(event.target.value));
-            updatedAddStudentFormData.busStopId = updateDefaultBusStopId(Number(updatedAddStudentFormData.busRouteId));
+    let busRouteStops = [];
+
+    if(schools.length > 0 && !addStudentFormData.schoolId) {
+        const updatedStudentFormData = {...addStudentFormData};
+        updatedStudentFormData.schoolId = schools[0].id;
+
+        setAddStudentFormData(updatedStudentFormData);
         }
 
-        else if(event.target.name === "busRouteId") {
-            updatedAddStudentFormData.busStopId = updateDefaultBusStopId(Number(updatedAddStudentFormData.busRouteId));
-        }
-        setAddStudentFormData(updatedAddStudentFormData);
+    if(addStudentFormData.schoolId  && schoolBusRoutes.length === 0) {
+        schoolBusRoutes = busRoutes.filter((busRoute)=>busRoute.school_id === addStudentFormData.schoolId);
     }
 
+   if(schoolBusRoutes.length > 0 && !addStudentFormData.busRouteId) {
+        const updatedStudentFormData = {...addStudentFormData};
+        updatedStudentFormData.busRouteId = schoolBusRoutes[0].id;
 
-    function updateDefaultBusRouteId(selectedSchoolId) {
-        return busRoutes.find((busRoute)=>busRoute.school_id === selectedSchoolId).id;
+        setAddStudentFormData(updatedStudentFormData);
+   }
+   
+    if(addStudentFormData.busRouteId  && busRouteStops.length === 0) {
+        busRouteStops = busStops.filter((busStop)=>busStop.bus_route_id === addStudentFormData.busRouteId);
     }
 
-    function updateDefaultBusStopId(selectedBusStopId) {
-        return busStops.find((busStop)=>busStop.bus_route_id === selectedBusStopId).id;
-    }
+   if(busRouteStops.length > 0 && !addStudentFormData.busStopId) {
+        const updatedStudentFormData = {...addStudentFormData};
+        updatedStudentFormData.busStopId = busRouteStops[0].id;
 
-    function handleAddAdditionalUser() {
-        setAddStudentFormData(blankFormData);
-        setStudentAddSuccessful(false);
-    }
-
-    if(schools.length > 0 && busRoutes.length > 0 && busStops.length > 0 && !addStudentFormData.busStopId)
-        {
-        let updatedAddStudentFormData = {...addStudentFormData};
-
-        updatedAddStudentFormData.schoolId = schools[0].id;
-
-        updatedAddStudentFormData.busRouteId = updateDefaultBusRouteId(updatedAddStudentFormData.schoolId);
-
-        updatedAddStudentFormData.busStopId = updateDefaultBusStopId(updatedAddStudentFormData.busRouteId);
-
-        setAddStudentFormData(updatedAddStudentFormData);
-        }
+        setAddStudentFormData(updatedStudentFormData);
+   }
+   
 
     if(!studentAddSuccessful) {
         return (
@@ -94,54 +88,7 @@ function AddStudentForm({ user, students, setStudents, schools, busRoutes, busSt
                 <h1>Add a Student</h1>
                 {addStudentErrors.length > 0 ? <DisplayErrors errors = {addStudentErrors} /> : null}
                 <form onSubmit={handleSubmitAddStudentForm}>
-                    <label>First name: </label>
-                    <input name = "firstName" value = {addStudentFormData.firstName} onChange = {handleAddStudentFormChange} />
-                    <br />
-                    <br />
-
-                    <label>Last name: </label>
-                    <input name = "lastName" value = {addStudentFormData.lastName} onChange = {handleAddStudentFormChange} />
-                    <br />
-                    <br />
-
-                    <label>School: </label>
-                    <select name = "schoolId" value = {addStudentFormData.schoolId} onChange = {handleAddStudentFormChange}>
-                        {addStudentFormData.schoolId ? 
-                            schools.map((school) => <option key = {school.id} value = {school.id}>{school.name}</option>) :
-                            <option disabled>Loading...</option>}
-                    </select>
-                    <br />
-                    <br />
-
-                    <label>Bus Route: </label>
-                    <select name = "busRouteId" value = {addStudentFormData.busRouteId} onChange = {handleAddStudentFormChange}>
-                        {addStudentFormData.busRouteId ? 
-                            busRoutes.map((busRoute) => {
-                                if(busRoute.school_id === addStudentFormData.schoolId) {
-                                    return <option key = {busRoute.id} value = {busRoute.id}>{busRoute.name}</option>
-                                }
-                                else {
-                                    return null;
-                                }
-                            }) :
-                            <option disabled>Loading...</option>}
-                    </select>
-                    <br />
-                    <br />
-
-                    <label>Bus Stop: </label>
-                    <select name = "busStopId" value = {addStudentFormData.busStopId} onChange = {handleAddStudentFormChange}>
-                        {addStudentFormData.busStopId ? 
-                            busStops.map((busStop) => {
-                                if(busStop.bus_route_id === addStudentFormData.busRouteId) {
-                                    return <option key = {busStop.id} value = {busStop.id}>{busStop.location_description}</option>
-                                }
-                                else {
-                                    return null;
-                                }
-                            }) :
-                            <option disabled>Loading...</option>}
-                    </select>
+                    <AddEditStudentForm defaultStudentFormData = {blankFormData} studentFormData = {addStudentFormData} setStudentFormData = {setAddStudentFormData} schools = {schools} busRoutes = {busRoutes} busStops = {busStops} updateFormData = {updateFormData} />
                     <br />
                     <br />
                     <button type = "submit">Submit</button>
@@ -157,7 +104,7 @@ function AddStudentForm({ user, students, setStudents, schools, busRoutes, busSt
                 <h1>Add a Student</h1>
                 <p><strong>New student successfully added.</strong></p>
                 <p>Click <Link to = "/MyProfile">here</Link> to return to your profile</p>
-                <p>Click <Link to = "/AddStudentForm" onClick = {handleAddAdditionalUser}>here</Link> to add another student.</p>
+                {/* <p>Click <Link to = "/AddStudentForm" onClick = {handleAddAdditionalUser}>here</Link> to add another student.</p> */}
             </div>
         )
     }

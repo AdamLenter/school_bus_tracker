@@ -120,7 +120,7 @@ function App() {
           
           <Route exact path = "/AddStudentForm" element = {<AddStudentForm user = {user} students = {students} setStudents = {setStudents} schools = {schools} busRoutes = {busRoutes} busStops = {busStops} updateFormData = {updateFormData} />} />
 
-          <Route exact path = "/EditStudentForm/:studentId" element={<EditStudentForm />}/>
+          <Route exact path = "/EditStudentForm/:studentId" element={<EditStudentForm students = {students} schools = {schools} busRoutes = {busRoutes} busStops = {busStops} updateFormData = {updateFormData} />}/>
 
           <Route exact path = "/AddBusForm" element={<AddBusForm user = {user} setUser = {setUser} buses = {buses} updateFormData = {updateFormData} />} />
             
