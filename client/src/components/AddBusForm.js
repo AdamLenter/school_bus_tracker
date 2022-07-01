@@ -66,37 +66,49 @@ function AddBusForm({ user, setUser, buses, updateFormData }) {
         setBusId(null);
     }
     
-    return (
-        <div>
-            {addBusErrors.length > 0 ? <DisplayErrors errors = {addBusErrors} /> : null}
-            <h1>Add a Bus</h1>
-    
-            {!busAddSuccessful ? (
-                <form onSubmit={handleSubmitAddBusForm}>
-                    <label>Bus: </label>
-                    {buses && buses.length > 0 && busId ? 
-                        (<select name = "busId" value = {busId} onChange = {handleSelectBus}>
-                            {busId ? 
-                                displayedBuses.map((bus) => <option key = {bus.id} value = {bus.id}>{bus.number}</option>) :
-                                <option disabled>No buses to display</option>}
-                        </select>) : 
-                        null}
-                    <br />
-                    <br />
+    if(displayedBuses.length > 0) {
+        return (
+            <div>
+                {addBusErrors.length > 0 ? <DisplayErrors errors = {addBusErrors} /> : null}
+                <h1>Add a Bus</h1>
+        
+                {!busAddSuccessful ? (
+                    <form onSubmit={handleSubmitAddBusForm}>
+                        <label>Bus: </label>
+                        {buses && buses.length > 0 && busId ? 
+                            (<select name = "busId" value = {busId} onChange = {handleSelectBus}>
+                                {busId ? 
+                                    displayedBuses.map((bus) => <option key = {bus.id} value = {bus.id}>{bus.number}</option>) :
+                                    <option disabled>No buses to display</option>}
+                            </select>) : 
+                            null}
+                        <br />
+                        <br />
 
-                    {busId ? <button type = "submit">Submit</button> : <button disabled>Submit</button>}
-                </form>
-                ) : (
-                <div>
-                   <p><strong>New bus successfully added.</strong></p>
-                    <p>Click <Link to = "/AddBusForm" onClick = {handleAddAdditionalBus}>here</Link> to add another bus</p>
-                </div>
-                )}
+                        {busId ? <button type = "submit">Submit</button> : <button disabled>Submit</button>}
+                    </form>
+                    ) : (
+                    <div>
+                    <p><strong>New bus successfully added.</strong></p>
+                        <p>Click <Link to = "/AddBusForm" onClick = {handleAddAdditionalBus}>here</Link> to add another bus</p>
+                    </div>
+                    )}
 
-            <br />
-            <p>Click <Link to = "/MyProfile">here</Link> to return to your profile</p>
-        </div>
-    );
+                <br />
+                <p>Click <Link to = "/MyProfile">here</Link> to return to your profile</p>
+            </div>
+        );
+    }
+    else {
+        return (
+            <div>
+                <h1>Add a Bus</h1>
+                <p>(no remaining buses to add)</p>
+                <br />
+                <p>Click <Link to = "/MyProfile">here</Link> to return to your profile</p>
+            </div>
+        )
+    }
 }
 
 export default AddBusForm;
