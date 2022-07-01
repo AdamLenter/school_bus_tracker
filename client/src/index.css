@@ -23,3 +23,11 @@ code {
   width: 300px;
   border: 1px solid black;
 }
+
+button {
+  background-color: #f4b141;
+  color: black;
+  font-weight: bold;
+  border-radius: 16px;
+  padding: 10px;
+}
