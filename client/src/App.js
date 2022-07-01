@@ -130,7 +130,7 @@ function App() {
           
           {!user['adult_contact'] ?
             <Route exact path = "/" element={<HomeScreen setUser = {setUser} updateFormData={updateFormData} />} /> : 
-            <Route exact path = "/" element={<LoggedInUserWelcomeScreen user = {user} setUser = {setUser} />} />}
+            <Route exact path = "/" element={<LoggedInUserWelcomeScreen user = {user} setUser = {setUser} students = {students} busRoutes = {busRoutes} />} />}
         </Routes>
       </BrowserRouter>
     </div>

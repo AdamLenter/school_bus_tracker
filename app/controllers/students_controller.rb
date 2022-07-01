@@ -18,7 +18,6 @@ class StudentsController < ApplicationController
     def update
         student = Student.find_by(id: params[:id])
         student.update(student_params)
-        student
         render json: student, status: :ok
     end
 

@@ -2,7 +2,7 @@ import '../App.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function LoggedInUserWelcomeScreen({ user, setUser }) {
+function LoggedInUserWelcomeScreen({ user, setUser, students }) {
     
     function handleLogout() {
         fetch("/logout", {
@@ -17,11 +17,11 @@ function LoggedInUserWelcomeScreen({ user, setUser }) {
                 <Link to="/MyProfile">View my profile</Link>
             </p>
                 
-                {user['adult_contact']['parent'] ? 
+                {(user['adult_contact']['parent'] && students.length > 0) ? 
                     <p><Link to="/trackStudentBus">Track a bus</Link></p> : null}
 
 
-                {user['adult_contact']['driver'] ? 
+                {(user['adult_contact']['driver'] && user.adult_contact.buses.length > 0) ? 
                     <p>
                         <Link to="/logBusRoute">Log bus route</Link> 
                     </p>: null}
