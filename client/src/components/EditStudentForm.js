@@ -1,6 +1,5 @@
 import '../App.css';
 import React, { useState } from 'react';
-import DisplayErrors from './DisplayErrors';
 import { Link, useParams } from 'react-router-dom';
 import AddEditStudentForm from './AddEditStudentForm';
 

@@ -6,7 +6,7 @@ import { Link } from 'react-router-dom';
 function ProfileChildSection({ students, setStudents, busStops }) {
     
     function deleteStudent(event) {
-        const updatedStudents = students.filter((student)=>student.id != event.target.value);
+        const updatedStudents = students.filter((student)=>student.id !== Number(event.target.value));
         setStudents(updatedStudents);
 
         fetch(`/students/${event.target.value}`, {
