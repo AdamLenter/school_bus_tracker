@@ -48,32 +48,22 @@ function AddStudentForm({ user, students, setStudents, schools, busRoutes, busSt
         })
     }
 
-    let schoolBusRoutes = [];
-
-    let busRouteStops = [];
-
-
-    let defaultSchoolId;
-    let defaultBusRouteId;
-    let defaultBusStopId;
+    let firstBusRoute = {};
+    let firstBusStop = {};
 
     let updatedStudentFormData = {...addStudentFormData};
 
-    if(!addStudentFormData.busStopId && schools.length > 0 && busRoutes.length > 0 && busStops.length > 0) {
+    if(!addStudentFormData.busStopId && busStops.length > 0) {
         //All of the arrays are set. We ned to set the defaults:
-        defaultSchoolId = schools[0].id;
+        updatedStudentFormData.schoolId = schools[0].id;
 
-        schoolBusRoutes = busRoutes.filter((busRoute)=>busRoute.school_id === defaultSchoolId);
+        firstBusRoute = busRoutes.find((busRoute)=>busRoute.school_id === updatedStudentFormData.schoolId);
 
-        defaultBusRouteId = schoolBusRoutes[0].id;
+        updatedStudentFormData.busRouteId = firstBusRoute.id;
 
-        busRouteStops = busStops.filter((busStop)=>busStop.bus_route_id === defaultBusRouteId); 
+        firstBusStop = busStops.find((busStop)=>busStop.bus_route_id === updatedStudentFormData.busRouteId); 
 
-        defaultBusStopId = busRouteStops[0].id;
-
-        updatedStudentFormData.schoolId = defaultSchoolId; 
-        updatedStudentFormData.busRouteId = defaultBusRouteId; 
-        updatedStudentFormData.busStopId = defaultBusStopId; 
+        updatedStudentFormData.busStopId = firstBusStop.id;
 
         setAddStudentFormData(updatedStudentFormData);
     }
