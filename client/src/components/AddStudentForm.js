@@ -52,35 +52,31 @@ function AddStudentForm({ user, students, setStudents, schools, busRoutes, busSt
 
     let busRouteStops = [];
 
-    if(schools.length > 0 && !addStudentFormData.schoolId) {
-        const updatedStudentFormData = {...addStudentFormData};
-        updatedStudentFormData.schoolId = schools[0].id;
+
+    let defaultSchoolId;
+    let defaultBusRouteId;
+    let defaultBusStopId;
+
+    let updatedStudentFormData = {...addStudentFormData};
+
+    if(!addStudentFormData.busStopId && schools.length > 0 && busRoutes.length > 0 && busStops.length > 0) {
+        //All of the arrays are set. We ned to set the defaults:
+        defaultSchoolId = schools[0].id;
+
+        schoolBusRoutes = busRoutes.filter((busRoute)=>busRoute.school_id === defaultSchoolId);
+
+        defaultBusRouteId = schoolBusRoutes[0].id;
+
+        busRouteStops = busStops.filter((busStop)=>busStop.bus_route_id === defaultBusRouteId); 
+
+        defaultBusStopId = busRouteStops[0].id;
+
+        updatedStudentFormData.schoolId = defaultSchoolId; 
+        updatedStudentFormData.busRouteId = defaultBusRouteId; 
+        updatedStudentFormData.busStopId = defaultBusStopId; 
 
         setAddStudentFormData(updatedStudentFormData);
-        }
-
-    if(addStudentFormData.schoolId  && schoolBusRoutes.length === 0) {
-        schoolBusRoutes = busRoutes.filter((busRoute)=>busRoute.school_id === addStudentFormData.schoolId);
     }
-
-   if(schoolBusRoutes.length > 0 && !addStudentFormData.busRouteId) {
-        const updatedStudentFormData = {...addStudentFormData};
-        updatedStudentFormData.busRouteId = schoolBusRoutes[0].id;
-
-        setAddStudentFormData(updatedStudentFormData);
-   }
-   
-    if(addStudentFormData.busRouteId  && busRouteStops.length === 0) {
-        busRouteStops = busStops.filter((busStop)=>busStop.bus_route_id === addStudentFormData.busRouteId);
-    }
-
-   if(busRouteStops.length > 0 && !addStudentFormData.busStopId) {
-        const updatedStudentFormData = {...addStudentFormData};
-        updatedStudentFormData.busStopId = busRouteStops[0].id;
-
-        setAddStudentFormData(updatedStudentFormData);
-   }
-   
 
     if(!studentAddSuccessful) {
         return (
