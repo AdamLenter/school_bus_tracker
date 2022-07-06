@@ -72,6 +72,18 @@ function App() {
     return updatedFormData;
   }
 
+  function fetchStudents(adultContactID) {
+    const fetchUrl = `/parent_students/${adultContactID}`;
+    fetch(fetchUrl)
+    .then((r)=>r.json())
+    .then((studentList)=>{
+      if(studentList.length > 0) {
+        setStudents(studentList);
+      }
+    })
+    return;
+  }
+
   useEffect(()=> {
     fetch("/me")
     .then((r)=>r.json())
@@ -79,13 +91,7 @@ function App() {
       if(userInfo['username']) {
         setUser(userInfo);
 
-        fetch(`/parent_students/${userInfo.adult_contact.id}`)
-          .then((r)=>r.json())
-          .then((studentList)=>{
-            if(studentList.length > 0) {
-              setStudents(studentList);
-            }
-         })
+        fetchStudents(userInfo.adult_contact.id);
         }
     })
   }, [])
@@ -129,8 +135,8 @@ function App() {
           <Route exact path = "/TrackStudentBus" element={<TrackStudentBus students = {students} busRoutes = {busRoutes} currentDate = {currentDate} updateFormData = {updateFormData} busStops = {busStops} getDateTime = {getDateTime} displayTime = {displayTime} />} />
           
           {!user['adult_contact'] ?
-            <Route exact path = "/" element={<HomeScreen setUser = {setUser} updateFormData={updateFormData} />} /> : 
-            <Route exact path = "/" element={<LoggedInUserWelcomeScreen user = {user} setUser = {setUser} students = {students} busRoutes = {busRoutes} />} />}
+            <Route exact path = "/" element={<HomeScreen setUser = {setUser} fetchStudents = {fetchStudents} updateFormData={updateFormData} />} /> : 
+            <Route exact path = "/" element={<LoggedInUserWelcomeScreen user = {user} setUser = {setUser} students = {students} setStudents = {setStudents} busRoutes = {busRoutes} />} />}
         </Routes>
       </BrowserRouter>
     </div>

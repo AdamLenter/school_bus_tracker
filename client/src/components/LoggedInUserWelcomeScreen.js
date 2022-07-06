@@ -2,14 +2,17 @@ import '../App.css';
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-function LoggedInUserWelcomeScreen({ user, setUser, students }) {
+function LoggedInUserWelcomeScreen({ user, setUser, students, setStudents }) {
     
     function handleLogout() {
         fetch("/logout", {
             method: "DELETE"})
-            .then (()=>setUser({}))
+            .then (()=> {
+                setUser({});
+                setStudents([]);
+            })
         }
-
+        
     return (
         <div>
             <h1>Welcome, {user['adult_contact']['first_name']}</h1>

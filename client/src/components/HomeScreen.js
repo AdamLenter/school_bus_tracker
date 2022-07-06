@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import DisplayErrors from './DisplayErrors';
 
 
-function HomeScreen({ setUser, updateFormData}) {
+function HomeScreen({ setUser, fetchStudents, updateFormData}) {
   const blankLoginFormData = {
     username: "", 
     password: ""
@@ -28,7 +28,10 @@ function HomeScreen({ setUser, updateFormData}) {
       })
       .then((response) => {
           if (response.ok) {
-            response.json().then((userInfo)=>setUser(userInfo));
+            response.json().then((userInfo)=>{
+              setUser(userInfo);
+              fetchStudents(userInfo.adult_contact.id);
+            });
           } else {
             response.json().then((errorData) => setLoginErrors(errorData.errors));
           }
