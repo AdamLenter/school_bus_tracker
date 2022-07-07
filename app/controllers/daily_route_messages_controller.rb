@@ -6,7 +6,7 @@ class DailyRouteMessagesController < ApplicationController
 
     private
     def daily_route_message_params
-        params.permit(:message, :daily_route_id)
+        params.permit(:message, :daily_route_id, :message_time)
     end
 
 end

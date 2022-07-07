@@ -20,6 +20,8 @@ function App() {
   const [user, setUser] = useState({});
   const [students, setStudents] = useState([]);
 
+  const [completedBusStops, setCompletedBusStops] = useState([]);
+
   const currentDate = new Date().toISOString().split('T')[0];
 
   function displayTime(rubyTime) {
@@ -57,6 +59,12 @@ function App() {
         padTo2Digits(date.getSeconds()),
       ].join(':')
     );
+  }
+
+  function getCompletedBusStops(dailyRouteId) {
+    fetch(`/daily_route_stop_times_by_parameters/${dailyRouteId}`)
+        .then((r)=>r.json())
+        .then((completedStopList)=> setCompletedBusStops(completedStopList))
   }
 
   function updateFormData(formData, event) {
@@ -130,9 +138,9 @@ function App() {
 
           <Route exact path = "/AddBusForm" element={<AddBusForm user = {user} setUser = {setUser} buses = {buses} updateFormData = {updateFormData} />} />
             
-          <Route exact path = "/LogBusRoute" element={ <LogBusRouteScreen user = {user} setUser = {setUser} busRoutes = {busRoutes} currentDate = {currentDate} getDateTime = {getDateTime} displayTime = {displayTime} updateFormData = {updateFormData} />} />
+          <Route exact path = "/LogBusRoute" element={ <LogBusRouteScreen user = {user} setUser = {setUser} busRoutes = {busRoutes} completedBusStops = {completedBusStops} getCompletedBusStops = {getCompletedBusStops} setCompletedBusStops = {setCompletedBusStops} currentDate = {currentDate} getDateTime = {getDateTime} displayTime = {displayTime} updateFormData = {updateFormData} />} />
 
-          <Route exact path = "/TrackStudentBus" element={<TrackStudentBus students = {students} busRoutes = {busRoutes} currentDate = {currentDate} updateFormData = {updateFormData} busStops = {busStops} getDateTime = {getDateTime} displayTime = {displayTime} />} />
+          <Route exact path = "/TrackStudentBus" element={<TrackStudentBus students = {students} busRoutes = {busRoutes} currentDate = {currentDate} updateFormData = {updateFormData} busStops = {busStops} completedBusStops = {completedBusStops} getCompletedBusStops = {getCompletedBusStops} getDateTime = {getDateTime} displayTime = {displayTime} />} />
           
           {!user['adult_contact'] ?
             <Route exact path = "/" element={<HomeScreen setUser = {setUser} fetchStudents = {fetchStudents} updateFormData={updateFormData} />} /> : 

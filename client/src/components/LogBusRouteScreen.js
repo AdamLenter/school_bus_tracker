@@ -4,7 +4,7 @@ import BeginLoggingBusRouteForm from './BeginLoggingBusRouteForm';
 import LogBusRouteDetails from './LogBusRouteDetails';
 import { Link } from 'react-router-dom';
 
-function LogBusRouteScreen({ user, busRoutes, currentDate, getDateTime, displayTime, updateFormData }) {
+function LogBusRouteScreen({ user, busRoutes, completedBusStops, getCompletedBusStops, setCompletedBusStops, currentDate, getDateTime, displayTime, updateFormData }) {
     
     const [dailyRouteInfo, setDailyRouteInfo] = useState({});
     let busRouteDetails = {};
@@ -44,9 +44,9 @@ function LogBusRouteScreen({ user, busRoutes, currentDate, getDateTime, displayT
             <div>
                 <h1>Log Bus Route</h1>
                 {!dailyRouteInfo.id ? 
-                    <BeginLoggingBusRouteForm user = {user} busRoutes = {busRoutes} currentDate = {currentDate} getDateTime = {getDateTime} setDailyRouteInfo = {setDailyRouteInfo} updateFormData = {updateFormData} /> : 
+                    <BeginLoggingBusRouteForm user = {user} busRoutes = {busRoutes} getCompletedBusStops = {getCompletedBusStops} currentDate = {currentDate} getDateTime = {getDateTime} setDailyRouteInfo = {setDailyRouteInfo} updateFormData = {updateFormData} /> : 
                     displayedBusStopList.length > 0 ?  
-                        <LogBusRouteDetails busRouteDetails = {busRouteDetails} dailyRouteInfo = {dailyRouteInfo} setDailyRouteInfo = {setDailyRouteInfo} busStops = {displayedBusStopList} getDateTime = {getDateTime} displayTime = {displayTime} />: 
+                        <LogBusRouteDetails busRouteDetails = {busRouteDetails} dailyRouteInfo = {dailyRouteInfo} setDailyRouteInfo = {setDailyRouteInfo} busStops = {displayedBusStopList} completedBusStops = {completedBusStops} getCompletedBusStops = {getCompletedBusStops} setCompletedBusStops = {setCompletedBusStops} getDateTime = {getDateTime} displayTime = {displayTime} />: 
                         null
                 }
                 

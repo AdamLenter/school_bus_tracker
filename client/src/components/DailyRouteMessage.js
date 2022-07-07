@@ -5,7 +5,7 @@ function DailyRouteMessage({ messageInfo, displayTime }) {
     
     return (
         <div>
-            <strong>{displayTime(messageInfo.updated_at)}</strong>: {messageInfo.message}
+            <strong>{displayTime(messageInfo.message_time)}</strong>: {messageInfo.message}
             <br />
             <br />
         </div>

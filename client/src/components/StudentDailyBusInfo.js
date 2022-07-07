@@ -3,7 +3,7 @@ import React from 'react';
 import DailyBusStopLog from './DailyBusStopLog';
 import DailyRouteMessage from './DailyRouteMessage';
 
-function StudentDailyBusInfo({ student, busRoute, dailyBusRoute, busStops, getDateTime, displayTime }) {
+function StudentDailyBusInfo({ student, busRoute, dailyBusRoute, busStops, completedBusStops, getCompletedBusStops, getDateTime, displayTime }) {
     
     const busStopsToDisplay = busStops.filter((busStop)=>busStop.bus_route_id === busRoute.id);
 
@@ -23,10 +23,10 @@ function StudentDailyBusInfo({ student, busRoute, dailyBusRoute, busStops, getDa
                 <strong>Began Route: </strong>{dailyBusRoute.route_start_time ? displayTime(dailyBusRoute.route_start_time) : "N/A"}
             </p>
             <br />
-            {dailyBusRoute.created_at ? 
+            {dailyBusRoute.route_start_time ? 
                 <div>
                     <strong>Stop Times:</strong>
-                    <DailyBusStopLog dailyRouteId = {dailyBusRoute.id} busStops = {busStopsToDisplay} getDateTime = {getDateTime} displayTime = {displayTime} mode = "student" />
+                    <DailyBusStopLog dailyRouteId = {dailyBusRoute.id} busStops = {busStopsToDisplay} completedBusStops = {completedBusStops} getCompletedBusStops = {getCompletedBusStops} getDateTime = {getDateTime} displayTime = {displayTime} mode = "student" />
                 </div> : null}
 
             <h2>Driver Messages</h2>

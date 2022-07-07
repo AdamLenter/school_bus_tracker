@@ -1,7 +1,7 @@
 import '../App.css';
 import React, { useState } from 'react';
 
-function BeginLoggingBusRouteForm({ user, busRoutes, currentDate, getDateTime, setDailyRouteInfo, updateFormData }) {
+function BeginLoggingBusRouteForm({ user, busRoutes, currentDate, getCompletedBusStops, getDateTime, setDailyRouteInfo, updateFormData }) {
 
     const [logRouteFormData, setLogRouteFormData] = useState({
         busId: null, 
@@ -48,12 +48,13 @@ function BeginLoggingBusRouteForm({ user, busRoutes, currentDate, getDateTime, s
             .then((response) => {
                 if (response.ok) {
                     response.json().then((createdDailyRoute)=>{
-                        setDailyRouteInfo(createdDailyRoute)
+                        setDailyRouteInfo(createdDailyRoute);
+                        getCompletedBusStops(createdDailyRoute.id);
                     })
                 }
             })
         }
-  
+ 
     if(logRouteFormData.busId) {
         displayedBusRoutes = busRoutes.filter((busRoute) => busRoute.bus_id === logRouteFormData.busId);
     }

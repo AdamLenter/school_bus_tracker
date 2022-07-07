@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import DailyBusStopLog from './DailyBusStopLog';
 import DailyRouteMessage from './DailyRouteMessage';
 
-function LogBusRouteDetails({ busRouteDetails, dailyRouteInfo, setDailyRouteInfo, busStops, getDateTime, displayTime }) {
+function LogBusRouteDetails({ busRouteDetails, dailyRouteInfo, setDailyRouteInfo, busStops, completedBusStops, getCompletedBusStops, setCompletedBusStops, getDateTime, displayTime }) {
     const [dailyRouteMessage, setDailyRouteMessage] = useState("");
 
     function handleEditMessage(event){
@@ -12,11 +12,11 @@ function LogBusRouteDetails({ busRouteDetails, dailyRouteInfo, setDailyRouteInfo
 
     function handleSubmitMessageForm(event) {
         event.preventDefault();
-        console.log(dailyRouteMessage);
 
         const dailyRouteMessageForDb = {
             message: dailyRouteMessage, 
-            daily_route_id: dailyRouteInfo.id
+            daily_route_id: dailyRouteInfo.id, 
+            message_time: getDateTime(new Date())
         }
         if(dailyRouteMessage !== "") {
             fetch("/daily_route_messages", {
@@ -50,7 +50,7 @@ function LogBusRouteDetails({ busRouteDetails, dailyRouteInfo, setDailyRouteInfo
                 <strong>To/From School: </strong>{dailyRouteInfo.to_or_from_school === "to" ? "To" : "From"}
                 <br />
                 <br />
-                <DailyBusStopLog dailyRouteId = {dailyRouteInfo.id} busStops = {busStops} getDateTime = {getDateTime} displayTime = {displayTime} mode = "driver" />
+                <DailyBusStopLog dailyRouteId = {dailyRouteInfo.id} busStops = {busStops} completedBusStops = {completedBusStops} getCompletedBusStops = {getCompletedBusStops} setCompletedBusStops = {setCompletedBusStops} getDateTime = {getDateTime} displayTime = {displayTime} mode = "driver" />
                 <br />
                 <br />
 

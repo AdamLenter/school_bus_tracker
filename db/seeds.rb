@@ -63,6 +63,12 @@ BusStop.create({id: 18, bus_route_id: 18, location_description: "Intersection of
 
 BusStop.create({id: 19, bus_route_id: 1, location_description: "Intersection of Bar Beach Rd. and Elm St.", expected_pick_up_time: "07:52:00", expected_drop_off_time: "15:05:00"})
 
+BusStop.create({id: 20, bus_route_id: 1, location_description: "Intersection of Bar Beach Rd. and Birch St.", expected_pick_up_time: "07:53:00", expected_drop_off_time: "15:07:00"})
+
+BusStop.create({id: 21, bus_route_id: 1, location_description: "Intersection of Park Ave. and Elm St.", expected_pick_up_time: "07:55:00", expected_drop_off_time: "15:09:00"})
+
+BusStop.create({id: 22, bus_route_id: 1, location_description: "Intersection of Park Ave. and Orchard St.", expected_pick_up_time: "07:57:00", expected_drop_off_time: "15:11:00"})
+
 
 
 puts "Done seeding"

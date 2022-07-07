@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import StudentDailyBusInfo from './StudentDailyBusInfo';
 import { Link } from 'react-router-dom';
 
-function TrackStudentBus({ students, busRoutes, currentDate, updateFormData, busStops, getDateTime, displayTime }) {
+function TrackStudentBus({ students, busRoutes, currentDate, updateFormData, busStops, completedBusStops, getCompletedBusStops, getDateTime, displayTime }) {
 
     const [trackBusFormData, setTrackBusFormData] = useState({
         studentId: null, 
@@ -50,12 +50,13 @@ function TrackStudentBus({ students, busRoutes, currentDate, updateFormData, bus
             .then((dailyBusRouteInfo)=>{
                 if(dailyBusRouteInfo) {
                     setDailyBusRoute(dailyBusRouteInfo);
+                    getCompletedBusStops(dailyBusRouteInfo.id);
                 }
             });
 
         setSearchedBusInfo(updatedSearchedBusInfo);
     }
-
+    
     if(students.length > 0 && !trackBusFormData.studentId) {
         let updatedTrackBusFormData = {...trackBusFormData};
         updatedTrackBusFormData.studentId = students[0].id;
@@ -82,7 +83,7 @@ function TrackStudentBus({ students, busRoutes, currentDate, updateFormData, bus
                     <button type = "submit">Submit</button>
                 </form>
                 <br />
-                {searchedBusInfo.student.first_name ? <StudentDailyBusInfo student = {searchedBusInfo.student} busRoute = {searchedBusInfo.busRoute} dailyBusRoute = {dailyBusRoute} busStops = {busStops} getDateTime = {getDateTime} displayTime = {displayTime} /> : null}
+                {searchedBusInfo.student.first_name ? <StudentDailyBusInfo student = {searchedBusInfo.student} busRoute = {searchedBusInfo.busRoute} dailyBusRoute = {dailyBusRoute} busStops = {busStops} completedBusStops = {completedBusStops} getCompletedBusStops = {getCompletedBusStops} getDateTime = {getDateTime} displayTime = {displayTime} /> : null}
                 <br />
                 <br />
                 <p>Click <Link to = "/">here</Link> to return to the home screen</p>
