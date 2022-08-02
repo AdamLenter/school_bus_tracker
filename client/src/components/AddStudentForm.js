@@ -90,7 +90,7 @@ function AddStudentForm({ user, students, setStudents, schools, busRoutes, busSt
                 <h1>Add a Student</h1>
                 <p><strong>New student successfully added.</strong></p>
                 <p>Click <Link to = "/MyProfile">here</Link> to return to your profile</p>
-                {/* <p>Click <Link to = "/AddStudentForm" onClick = {handleAddAdditionalUser}>here</Link> to add another student.</p> */}
+                {/* <p>Click <Link to = "/AddStudentForm">here</Link> to add another student.</p> */}
             </div>
         )
     }

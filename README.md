@@ -12,6 +12,8 @@ The backend files are located in the app folder. They consist of the controllers
 The db folder contains all of the migrations as well as the database schema.
 The API routes themselves can be found in routes.rb file, which can be found in the config directory.
 
+##Setup
+
 ###Frontend
 The frontend files are stored in the client directory.
 App.js contains many of the fetch GET requests in order receive the preliminary data.
