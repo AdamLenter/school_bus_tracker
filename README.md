@@ -1,5 +1,6 @@
-# School Bus Tracker
 ![Alt text](/client/src/bus_image.jpeg "a title")
+
+# School Bus Tracker
 As I wait in the pouring rain to pick up my child from school, I think to myself: "Wouldn't it be great to know where his bus is?" Even on perfectly sunny days, it is less than ideal to wait at the bus stop for 20 minutes. Even worse, there have been times when the bus has broken down or had other issues that has made it an hour+ late. 
 
 To remedy this issue, I have developed a simple school bus tracker.
