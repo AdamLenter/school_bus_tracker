@@ -9,12 +9,12 @@ To remedy this issue, I have developed a simple school bus tracker.
 This system uses Ruby on Rails with a postgres server for the backend as well as React with React Router on the frontend.
 
 ## File Structure
-###Backend
+### Backend
 The backend files are located in the app folder. They consist of the controllers, models, and serializers necessary to fetch Data to/from the database. 
 The db folder contains all of the migrations as well as the database schema.
 The API routes themselves can be found in routes.rb file, which can be found in the config directory.
 
-###Frontend
+### Frontend
 The frontend files are stored in the client directory.
 App.js contains many of the fetch GET requests in order receive the preliminary data.
 All of the React routes are contained in the src/components directory.
