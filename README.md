@@ -1,4 +1,5 @@
 # School Bus Tracker
+![Alt text](/client/src/bus_image.jpeg "a title")
 As I wait in the pouring rain to pick up my child from school, I think to myself: "Wouldn't it be great to know where his bus is?" Even on perfectly sunny days, it is less than ideal to wait at the bus stop for 20 minutes. Even worse, there have been times when the bus has broken down or had other issues that has made it an hour+ late. 
 
 To remedy this issue, I have developed a simple school bus tracker.
@@ -12,13 +13,15 @@ The backend files are located in the app folder. They consist of the controllers
 The db folder contains all of the migrations as well as the database schema.
 The API routes themselves can be found in routes.rb file, which can be found in the config directory.
 
-##Setup
-
 ###Frontend
 The frontend files are stored in the client directory.
 App.js contains many of the fetch GET requests in order receive the preliminary data.
 All of the React routes are contained in the src/components directory.
     
+## Setup
+From the school_bus_tracker directory, enter the command: rails s
+From the school_bus_tracker/client directory, enter the command: npm start
+
 
 ## Usage
 When first using the system, the user can go to the create user page, where s/he enters his/her first name, last name, whether s/he is a parent, driver, or both, and creates a username and password.
